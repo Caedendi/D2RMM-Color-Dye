@@ -27,6 +27,25 @@ class FileConstants {
   static FILE_PATH_ITEMSTATCOST = `${this.PATH_GLOBAL_EXCEL}itemstatcost${this.FILE_EXTENSION_TXT}`;
   static FILE_PATH_PROPERTIES   = `${this.PATH_GLOBAL_EXCEL}properties${this.FILE_EXTENSION_TXT}`;
   static FILE_PATH_STATES       = `${this.PATH_GLOBAL_EXCEL}states${this.FILE_EXTENSION_TXT}`;
+  
+  static itemStatCostColums = {
+    stat:         "Stat",
+    id:           "*ID",
+    sendBits:     "Send Bits",
+    add:          "Add",
+    multiply:     "Multiply",
+    valShift:     "ValShift",
+    saveBits109:  "1.09-Save Bits",
+    saveAdd109:   "1.09-Save Add",
+    saveBits:     "Save Bits",
+    saveAdd:      "Save Add",
+    descPriority: "descpriority",
+    descFunc:     "descfunc",
+    descVal:      "descval",
+    descStrPos:   "descstrpos",
+    descStrNeg:   "descstrneg",
+    eol:          "*eol\r",
+  };
 
   static jsonProperties = {
       id:   "id",
@@ -139,12 +158,26 @@ class JewelryConstants {
   static clrName = ColorConstants.white;
 }
 
-class EndgameConstants {
-  static essences = [
-    { id: "tes", name: "Twisted Essence of Suffering"     }, // Twisted Essence of Suffering
-    { id: "ceh", name: "Charged Essense of Hatred"        }, // Charged Essense of Hatred
-    { id: "bet", name: "Burning Essence of Terror"        }, // Burning Essence of Terror
-    { id: "fed", name: "Festering Essence of Destruction" }, // Festering Essence of Destruction
+class DyeConstants {
+  static itemStatCosts = [
+    { stat: "CD_White",   descStrPosNeg: "CDWhite",  isClr: true }, 
+    { stat: "CD_Black",   descStrPosNeg: "CDBlack",  isClr: true }, 
+    { stat: "CD_Blue",    descStrPosNeg: "CDBlue",   isClr: true }, 
+    { stat: "CD_Red",     descStrPosNeg: "CDRed",    isClr: true }, 
+    { stat: "CD_Green",   descStrPosNeg: "CDGreen",  isClr: true }, 
+    { stat: "CD_Yellow",  descStrPosNeg: "CDYellow", isClr: true }, 
+    { stat: "CD_Purple",  descStrPosNeg: "CDPurple", isClr: true }, 
+    { stat: "CD_Tracker", descStrPosNeg: "",         isClr: false }, 
+  ];
+
+  static itemModifers = [ // order/ids match the original ColorDye item-modifiers.json file
+    { id: 48000, name: "White",  clr: ColorConstants.white  },
+    { id: 48001, name: "Black",  clr: ColorConstants.gray   },
+    { id: 48002, name: "Blue",   clr: ColorConstants.blue   },
+    { id: 48003, name: "Red",    clr: ColorConstants.red    },
+    { id: 48004, name: "Green",  clr: ColorConstants.green  },
+    { id: 48005, name: "Yellow", clr: ColorConstants.yellow },
+    { id: 48006, name: "Purple", clr: ColorConstants.purple },
   ];
 }
 
@@ -163,52 +196,113 @@ class AbstractTxtBuilder {
 
     this.target = target;
   }
+
+  build() {
+    throw new Error("Cannot call abstract AbstractTxtBuilder.build() function directly.");
+  }
 }
 
-class CubeMainBuilder extends AbstractTxtBuilder {
-  build() {
-    if ( !config.ShouldDyeWithEssences 
-      && !config.ShouldDyeWithGems) {
-      return;
-    }
+// class CubeMainBuilder extends AbstractTxtBuilder {
+//   constructor() {
+//     super(FileConstants.FILE_PATH_CUBEMAIN);
+//   }
 
+//   build() {
+//     // do stuff
+//   }
+// }
+
+// class ItemStatCostBuilder extends AbstractTxtBuilder {
+//   constructor() {
+//     super(FileConstants.FILE_PATH_ITEMSTATCOST);
+//   }
+
+// class PropertiesBuilder extends AbstractTxtBuilder {
+//   constructor() {
+//     super(FileConstants.FILE_PATH_PROPERTIES);
+//   }
+
+//   build() {
+//     // do stuff
+//   }
+// }
+
+// class StatesBuilder extends AbstractTxtBuilder {
+//   constructor() {
+//     super(FileConstants.FILE_PATH_STATES);
+//   }
+
+//   build() {
+//     // do stuff
+//   }
+// }
+
+class CubeMainBuilder {
+  target = FileConstants.FILE_PATH_CUBEMAIN;
+
+  build() {
     // do stuff
   }
 }
 
-class ItemStatCostBuilder extends AbstractTxtBuilder {
-  constructor() {
-    super(FileConstants.FILE_PATH_ITEMSTATCOST);
-  }
+class ItemStatCostBuilder {
+  target = FileConstants.FILE_PATH_ITEMSTATCOST;
 
   build() {
-    if ( !config.ShouldDyeWithEssences 
-      && !config.ShouldDyeWithGems) {
-      return;
-    }
+    this.addDyes();
+  }
+  
+  addDyes() {
+    let file = D2RMM.readTsv(this.target);
 
+    let id = file.rows.length
+    DyeConstants.itemStatCosts.forEach(dye => {
+      file.rows.push(this.createColorDyeEntry(id, dye)); // push new entry to end of file
+      id++;
+    });
+    
+    D2RMM.writeTsv(this.target, file);
+  }
+
+  createColorDyeEntry(id, dye) {
+    let entry = {};
+
+    entry[FileConstants.itemStatCostColums.stat]        = dye.stat;
+    entry[FileConstants.itemStatCostColums.id]          = id;
+    entry[FileConstants.itemStatCostColums.sendBits]    = 16;
+    entry[FileConstants.itemStatCostColums.add]         = 102;
+    entry[FileConstants.itemStatCostColums.multiply]    = 20;
+    entry[FileConstants.itemStatCostColums.valShift]    = 1024;
+    entry[FileConstants.itemStatCostColums.saveBits109] = 10;
+    entry[FileConstants.itemStatCostColums.saveAdd109]  = 10;
+    entry[FileConstants.itemStatCostColums.saveBits]    = 11;
+    entry[FileConstants.itemStatCostColums.saveAdd]     = 10;
+    entry[FileConstants.itemStatCostColums.eol]         = 0;
+    
+    if (dye.isClr) {
+      entry[FileConstants.itemStatCostColums.descPriority] = 997;
+      entry[FileConstants.itemStatCostColums.descFunc]     = 3;
+      entry[FileConstants.itemStatCostColums.descVal]      = 0;
+      entry[FileConstants.itemStatCostColums.descStrPos]   = dye.descStrPosNeg;
+      entry[FileConstants.itemStatCostColums.descStrNeg]   = dye.descStrPosNeg;
+    }
+    
+    return entry;
+  }
+}
+
+class PropertiesBuilder {
+  target = FileConstants.FILE_PATH_PROPERTIES;
+
+  build() {
     // do stuff
   }
 }
 
-class PropertiesBuilder extends AbstractTxtBuilder {
+class StatesBuilder {
+  target = FileConstants.FILE_PATH_STATES;
+
   build() {
-    if ( !config.ShouldDyeWithEssences 
-      && !config.ShouldDyeWithGems) {
-      return;
-    }
-
-    // do stuff
-  }
-}
-
-class StatesBuilder extends AbstractTxtBuilder {
-  build() {
-    if ( !config.ShouldDyeWithEssences 
-      && !config.ShouldDyeWithGems) {
-      return;
-    }
-
     // do stuff
   }
 }
@@ -218,68 +312,35 @@ class StatesBuilder extends AbstractTxtBuilder {
 //   Color Dye Builders - JSON Files   //
 //=====================================//
 
-// class AbstractJsonBuilder {
-//   target = CharConstants.empty;
-
-//   constructor(target) {
-//     if (new.target === AbstractJsonBuilder) {
-//       throw new TypeError("Cannot construct abstract AbstractJsonBuilder instances directly.");
-//     }
-
-//     this.target = target;
-//   }
-// }
-
-class ItemModifiersBuilder {
-// class ItemModifiersBuilder extends AbstractJsonBuilder {
-//   constructor() {
-//     super(FileConstants.FILE_PATH_ITEM_MODIFIERS);
-//   }
+class ItemModifiersBuilder extends AbstractJsonBuilder {
   target = FileConstants.FILE_PATH_ITEM_MODIFIERS;
 
   build() {
-    if ( !config.ShouldDyeWithEssences 
-      && !config.ShouldDyeWithGems) {
-      return;
-    }
-
     this.addDyes();
   }
 
   addDyes() {
-    let dyeList = [ // order/ids match the original ColorDye item-modifiers.json file
-      { id: 48000, name: "White",  clr: ColorConstants.white  },
-      { id: 48001, name: "Black",  clr: ColorConstants.gray   },
-      { id: 48002, name: "Blue",   clr: ColorConstants.blue   },
-      { id: 48003, name: "Red",    clr: ColorConstants.red    },
-      { id: 48004, name: "Green",  clr: ColorConstants.green  },
-      { id: 48005, name: "Yellow", clr: ColorConstants.yellow },
-      { id: 48006, name: "Purple", clr: ColorConstants.purple },
-    ];
-
-    let file = D2RMM.readJson(this.target); // copy existing file
-    dyeList.forEach(dye => { 
-      file.push(this.createNewDyeModifier(dye));
+    let file = D2RMM.readJson(this.target);
+    DyeConstants.itemModifers.forEach(dye => { 
+      file.push(this.createEntry(dye.id, `CD${dye.name}`, `${ColorConstants.gold}Color Dyed: ${dye.clr}${dye.name}`)); // push new entry to end of file
     });
-    D2RMM.writeJson(this.target, file); // overwrite existing file with new file
+    D2RMM.writeJson(this.target, file);
   }
 
-  createNewDyeModifier(dye) {
-    let newMod = {};
+  createEntry(id, key, value) {
+    let entry = {};
+    entry[FileConstants.jsonProperties.id]  = id;
+    entry[FileConstants.jsonProperties.key] = key;
 
     Object.values(FileConstants.jsonProperties).forEach(prop => {
-      if (prop === FileConstants.jsonProperties.id) {
-        newMod[prop] = dye.id;
+      if ( prop === FileConstants.jsonProperties.id
+        || prop === FileConstants.jsonProperties.key) {
+        return;
       }
-      else if (prop === FileConstants.jsonProperties.key) {
-        newMod[prop] = `CD${dye.name}`
-      }
-      else {
-        newMod[prop] = `${ColorConstants.gold}Color Dyed: ${dye.clr}${dye.name}`;
-      }
+        entry[prop] = value;
     });
 
-    return newMod;
+    return entry;
   }
 };
 
@@ -291,7 +352,7 @@ class ItemModifiersBuilder {
 class ColorDyeBuilder {
   build() {
     // (new      CubeMainBuilder()).build(); // Cube recipes
-    // (new  ItemStatCostBuilder()).build(); // Item stats
+    (new  ItemStatCostBuilder()).build(); // Item stat values and shop costs
     // (new    PropertiesBuilder()).build(); // Item property names
     // (new        StatesBuilder()).build(); // Game states
     (new ItemModifiersBuilder()).build(); // Modifiers on items: "Color Dyed: xxx"
