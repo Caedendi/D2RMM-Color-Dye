@@ -1,0 +1,23 @@
+{
+  "name": "Color Dye",
+  "description": "Allows players to dye items any colour they want.",
+  "author": "Bonesy, Caedendi",
+  "website": "https://www.nexusmods.com/diablo2resurrected/mods/xxx",
+  "version": "1.0.0",
+  "config": [
+    {
+      "id": "ShouldDyeWithEssences",
+      "type": "checkbox",
+      "name": "Dye with Essences",
+      "description": "Enable combinations of Essences as dye ingredients.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldDyeWithGems",
+      "type": "checkbox",
+      "name": "Dye with Perfect Gems",
+      "description": "Enable Perfect Gems as dye ingredients.",
+      "defaultValue": false
+    }
+  ]
+}
