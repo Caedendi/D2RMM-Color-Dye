@@ -1,23 +1,8 @@
 {
   "name": "Color Dye",
-  "description": "Allows players to dye items any colour they want.",
+  "description": "Dye your armor, helm, weapon and shield to your preferred color using Perfect Gems/Skulls. Use an Antidote Potion to remove.",
   "author": "Bonesy, Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/xxx",
   "version": "1.0.0",
-  "config": [
-    {
-      "id": "ShouldDyeWithEssences",
-      "type": "checkbox",
-      "name": "Dye with Essences",
-      "description": "Enable combinations of Essences as dye ingredients.",
-      "defaultValue": true
-    },
-    {
-      "id": "ShouldDyeWithGems",
-      "type": "checkbox",
-      "name": "Dye with Perfect Gems",
-      "description": "Enable Perfect Gems as dye ingredients.",
-      "defaultValue": false
-    }
-  ]
+  "config": []
 }

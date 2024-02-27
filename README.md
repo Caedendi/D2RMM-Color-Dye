@@ -48,7 +48,6 @@ None at the moment.
 ## Roadmap
 
 - [ ] Full feature parity with the original mod.
-- [ ] Implement recipes using boss essences instead of gems
 
 
 ## Recommended Mods
