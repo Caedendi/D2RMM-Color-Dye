@@ -83,7 +83,7 @@ This mod is a reimplementation for a previously existing mod. I did not create t
 
 Many thanks to:
 - [olegbl](https://github.com/olegbl) for creating [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169)
-- [Bonsey](https://www.d2rmodding.com/)/ for creating [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) and [Slim](https://www.youtube.com/user/SlimStarCraft)/[roryskys](https://www.nexusmods.com/diablo2resurrected/users/74559688) for uploading it to Nexus Mods.
+- [Bonesey](https://www.d2rmodding.com/) for creating [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) and [Slim](https://www.youtube.com/user/SlimStarCraft)/[roryskys](https://www.nexusmods.com/diablo2resurrected/users/74559688) for uploading it to Nexus Mods.
 
 
 ## My Mods + Source
