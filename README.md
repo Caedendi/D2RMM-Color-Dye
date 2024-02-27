@@ -1,6 +1,6 @@
 # Color Dye for D2RMM
 
-A D2RMM reimplementation of the D2R mod ColorDye created by Bonsey and requested/uploaded by Slim
+A D2RMM reimplementation of the D2R mod [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) created by [Bonesey](https://www.d2rmodding.com/) and requested/uploaded by [Slim](https://www.youtube.com/user/SlimStarCraft)/[roryskys](https://www.nexusmods.com/diablo2resurrected/users/74559688).
 
 
 ## Table of Contents
