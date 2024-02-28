@@ -12,6 +12,12 @@
 //   Constants   //
 //===============//
 
+class CharConstants {
+  static empty = '';
+  static newLine = "\n";
+  static newLineTxt = "\r";
+}
+
 class FileConstants {
   // extensions
   static FILE_EXTENSION_JSON = ".json";
@@ -527,7 +533,7 @@ class ColorDyeBuilder {
     (new  ItemStatCostBuilder()).build();       // Item stat values and shop costs
     (new    PropertiesBuilder()).build();       // Item property names
     (new        StatesBuilder()).build(states); // States
-    (new      CubeMainBuilder()).build(states); // Cube recipes
+    // (new      CubeMainBuilder()).build(states); // Cube recipes
     (new ItemModifiersBuilder()).build();       // Modifiers on items: "Color Dyed: xxx"
   }
 }
