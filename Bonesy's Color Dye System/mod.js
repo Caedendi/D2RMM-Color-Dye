@@ -37,6 +37,7 @@ class FileConstants {
   static cubeMainColumns = {
     description: "description",
     enabled:     "*enabled",
+    enabled2:     "enabled",
     version:     "version",
     op:          "op",
     param:       "param",
@@ -190,18 +191,18 @@ class EquipmentColorConstants {
   static purple = "lpur";
 }
 
-class DyeConstants {
-  static items = {
-    gpw: "gpw",
-    skz: "skz",
-    gpb: "gpb",
-    gpr: "gpr",
-    gpg: "gpg",
-    gpy: "gpy",
-    gpv: "gpv",
-    yps: "yps",
-  };
+class GemConstants {
+  static perfectDiamond  = "gpw";
+  static perfectSkull    = "skz";
+  static perfectSapphire = "gpb";
+  static perfectRuby     = "gpr";
+  static perfectEmerald  = "gpg";
+  static perfectTopaz    = "gpy";
+  static perfectAmethyst = "gpv";
+  static antidotePotion  = "yps";
+}
 
+class DyeConstants {
   static none   = { name: "Clear",  dyeItem: "yps", value: 0, prop: ""          };
   static white  = { name: "White",  dyeItem: "gpw", value: 1, prop: "CD-White"  };
   static black  = { name: "Black",  dyeItem: "skz", value: 2, prop: "CD-Black"  };
@@ -240,6 +241,18 @@ class DyeConstants {
     { name: "Armor",  itemType: "tors" }, 
   ];
 
+  static cubeMainColors = [
+    { name: "White",  itemCode: GemConstants.perfectDiamond,  trackerValue: 1 }, 
+    { name: "Black",  itemCode: GemConstants.perfectSkull,    trackerValue: 2 }, 
+    { name: "Blue",   itemCode: GemConstants.perfectSapphire, trackerValue: 3 }, 
+    { name: "Red",    itemCode: GemConstants.perfectRuby,     trackerValue: 4 }, 
+    { name: "Green",  itemCode: GemConstants.perfectEmerald,  trackerValue: 5 }, 
+    { name: "Yellow", itemCode: GemConstants.perfectTopaz,    trackerValue: 6 }, 
+    { name: "Purple", itemCode: GemConstants.perfectAmethyst, trackerValue: 7 } 
+  ];
+
+  static cubeMainClear = { itemCode: GemConstants.antidotePotion, trackerValue: 0 };
+
   static statesColors = [
     { name: "White",  itemTrans: EquipmentColorConstants.white  }, 
     { name: "Black",  itemTrans: EquipmentColorConstants.black  }, 
@@ -268,44 +281,118 @@ class DyeConstants {
 //====================================//
 
 class CubeMainBuilder {
+
+  // BROKEN: 
+  // - mod2param
+  // - getStateId()
+  // - target color order starts at first color (white) instead of next occurring compared to current color
+  //   - black => blue, black => red, ... black => white
+
   target = FileConstants.FILE_PATH_CUBEMAIN;
 
-  build() {
-    this.addDyes();
+  build(states) {
+    this.addDyes(states);
   }
 
-  addDyes() {
+  addDyes(states) {
     let file = D2RMM.readTsv(this.target);
 
-    let id = file.rows.length;
-    DyeConstants.equipment.forEach(type => {
-        if (true) { // todo
-          return;
-        }
+    var debugState = [];
+    debugState[FileConstants.statesColumns.state] = `state: ${states[0].type} : ${states[0].clr} : ${states[0].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[1].type} : ${states[1].clr} : ${states[1].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[2].type} : ${states[2].clr} : ${states[2].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[3].type} : ${states[3].clr} : ${states[3].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[4].type} : ${states[4].clr} : ${states[4].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[5].type} : ${states[5].clr} : ${states[5].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[6].type} : ${states[6].clr} : ${states[6].id}`;
+    debugState[FileConstants.statesColumns.state] = `state: ${states[7].type} : ${states[7].clr} : ${states[7].id}`;
+    file.rows.push(debugState);
 
-        file.rows.push(this.createColorDyeEntry(id, type, dye)); // push new entry to end of file
-        id++;
+    DyeConstants.equipment.forEach(eq => {
+
+      // create Normal => Color
+      DyeConstants.cubeMainColors.forEach(dyeTo => {
+        let recipe = this.createNormalToColorRecipe(eq, dyeTo, states);
+        file.rows.push(recipe);
       });
+
+      // create Color => Color 
+      DyeConstants.cubeMainColors.forEach(dyeFrom => {
+        DyeConstants.cubeMainColors.forEach(dyeTo => {
+          if (dyeFrom.name === dyeTo.name) {
+            return;
+          }
+          let recipe = this.createColorToColorRecipe(eq, dyeFrom, dyeTo, states);
+          file.rows.push(recipe);
+        });
+        
+        // create Color => Clear
+        let recipe = this.createColorToNormalRecipe(eq, dyeFrom, states);
+        file.rows.push(recipe);
+      });
+    });
     
     D2RMM.writeTsv(this.target, file);
   }
 
-  createNormalToColorRecipe() {
-    var desc = `${eq.name} Dye - ${dye.from} -> ${dye.to}`;
+  createNormalToColorRecipe(eq, dyeTo, states) {
+    let desc = `${eq.name} Dye - Normal -> ${dyeTo.name}`;
+    let targetColorStateId = this.getStateId(states, eq.itemType, dyeTo.name);
+    let trackerValue = this.calculateTrackerValue(0, dyeTo.trackerValue);
+
+    let recipe = this.createRecipe();
+    this.initRecipe(recipe, desc, 0, eq.itemType, dyeTo.itemCode);
+    this.addColor(recipe, dyeTo.name, targetColorStateId, trackerValue);
+
+    return recipe;
   }
 
-  createColorToColorRecipe() {
+  createColorToColorRecipe(eq, dyeFrom, dyeTo, states) {
+    let desc = `${eq.name} Dye - ${dyeFrom.name} -> ${dyeTo.name}`;
+    let currentColorStateId = this.getStateId(states, eq.itemType, dyeFrom.name);
+    let targetColorStateId = this.getStateId(states, eq.itemType, dyeTo.name);
+    let trackerDiffValue = this.calculateTrackerValue(dyeFrom.trackerValue, dyeTo.trackerValue);
 
+    let recipe = this.createRecipe();
+    this.initRecipe(recipe, desc, dyeFrom.trackerValue, eq.itemType, dyeTo.itemCode);
+    this.changeColor(recipe, dyeFrom.name, currentColorStateId, dyeTo.name, targetColorStateId, trackerDiffValue);
+
+    return recipe;
   }
 
-  createColorToNormalRecipe() {
+  createColorToNormalRecipe(eq, dyeFrom, states) {
+    let desc = `${eq.name} Dye - ${dyeFrom.name} -> Clear`;
+    let currentColorStateId = this.getStateId(states, eq.itemType, dyeFrom.name);
+    let trackerValue = this.calculateTrackerValue(dyeFrom.trackerValue, 0);
 
+    let recipe = this.createRecipe();
+    this.initRecipe(recipe, desc, dyeFrom.trackerValue, eq.itemType, DyeConstants.cubeMainClear.itemCode);
+    this.clearColor(recipe, dyeFrom.name, currentColorStateId, trackerValue)
+
+    return recipe;
+  }
+
+  getStateId(states, type, clr) {
+    states.forEach(state => {
+
+      return `${state.type}:${state.clr}:${state.id}`;
+
+      if (state.type === type && state.clr === clr) {
+        return state.id;
+      }
+    })
+
+    return "no_state_id";
+  }
+
+  calculateTrackerValue(currentValue, desiredValue) {
+    return desiredValue - currentValue;;
   }
 
 
-  //===========//
-  //   noice   //
-  //===========//
+  //=====================//
+  //   recipe assembly   //
+  //=====================//
 
   createRecipe() {
     let recipe = {};
@@ -321,9 +408,10 @@ class CubeMainBuilder {
     return recipe;
   }
 
-  initRecipe(recipe, description, currentColorValue, itemType, dyeItem) {
+  initRecipe(recipe, description, currentColorTrackerValue, itemType, dyeItem) {
     recipe[FileConstants.cubeMainColumns.description] = description; // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
-    recipe[FileConstants.cubeMainColumns.value]       = currentColorValue; // 0 normal, 1 white, 2 black, etc reset at next equip type
+    recipe[FileConstants.cubeMainColumns.enabled2]     = 1;
+    recipe[FileConstants.cubeMainColumns.value]       = currentColorTrackerValue; // 0 normal, 1 white, 2 black, etc reset at next equip type
     recipe[FileConstants.cubeMainColumns.input1]      = itemType; // weap, helm, shld, tors
     recipe[FileConstants.cubeMainColumns.input2]      = dyeItem; // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
   }
@@ -345,7 +433,7 @@ class CubeMainBuilder {
   }
 
   addMod12(recipe, targetClr, value, stateId) {
-    recipe[FileConstants.cubeMainColumns.mod1]      = targetClr;
+    recipe[FileConstants.cubeMainColumns.mod1]      = `CD-${targetClr}`;
     recipe[FileConstants.cubeMainColumns.mod1min]   = value;
     recipe[FileConstants.cubeMainColumns.mod1max]   = value;
     recipe[FileConstants.cubeMainColumns.mod2]      = FileConstants.statesColumns.state;
@@ -361,7 +449,7 @@ class CubeMainBuilder {
   }
 
   addMod45(recipe, currentClr, stateId) {
-    recipe[FileConstants.cubeMainColumns.mod4] = currentClr;
+    recipe[FileConstants.cubeMainColumns.mod4] = `CD-${currentClr}`;
     recipe[FileConstants.cubeMainColumns.mod4min] = -1;
     recipe[FileConstants.cubeMainColumns.mod4max] = -1;
     recipe[FileConstants.cubeMainColumns.mod5] = FileConstants.statesColumns.state;
@@ -465,6 +553,10 @@ class StatesBuilder {
         file.rows.push(this.createColorDyeEntry(id, eq, dye)); // push new entry to end of file
         states.push({ type: eq.itemType, clr: dye.name, id: id });
         id++;
+
+        // var debugState = [];
+        // debugState[FileConstants.statesColumns.state] = `state: ${states[0].type} : ${states[0].clr} : ${states[0].id}`;
+        // file.rows.push(debugState);
       });
     });
     
@@ -533,7 +625,7 @@ class ColorDyeBuilder {
     (new  ItemStatCostBuilder()).build();       // Item stat values and shop costs
     (new    PropertiesBuilder()).build();       // Item property names
     (new        StatesBuilder()).build(states); // States
-    // (new      CubeMainBuilder()).build(states); // Cube recipes
+    (new      CubeMainBuilder()).build(states); // Cube recipes
     (new ItemModifiersBuilder()).build();       // Modifiers on items: "Color Dyed: xxx"
   }
 }
