@@ -7,7 +7,7 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
-  - [1.0.0 (work in progress)](#100-work-in-progress)
+  - [1.0.0](#100)
 - [How to Install](#how-to-install)
 - [Technicalities \& Limitations](#technicalities--limitations)
 - [Known Issues](#known-issues)
@@ -16,7 +16,6 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 - [License/Permissions](#licensepermissions)
 - [Credits](#credits)
 - [My Mods + Source](#my-mods--source)
-  - [Diablo II: Resurrected](#diablo-ii-resurrected)
 
 
 ## Screenshots
