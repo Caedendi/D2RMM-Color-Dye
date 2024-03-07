@@ -22,15 +22,17 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 ## Screenshots
 
 <p float="left">
-  <img src="https://i.imgur.com/todo1.png" alt="todo1" width="49%">
-  <img src="https://i.imgur.com/todo2.png" alt="todo2" width="49%">
+  <img src="https://i.imgur.com/todo.png" alt="todo1" width="49%">
+  <img src="https://i.imgur.com/todo.png" alt="todo2" width="49%">
 </p>
 
 
 ## Changelog
 
-### 1.0.0 (work in progress)
-- todo
+### 1.0.0
+- Initial D2RMM release, feature parity with [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418)
+  - Some lines in cubemain.txt are shifted, this mod's order makes more sense.
+- The added entries' IDs are generated dynamically (not hardcoded), so it's compatible with any (D2RMM) mod that touches the same files.
 
 
 ## How to Install
@@ -62,7 +64,8 @@ None at the moment.
 
 ## Roadmap
 
-- [ ] Full feature parity with the original mod
+- [x] Full feature parity with the original mods
+- [ ] Make item-modifiers.json's IDs scalable
 - [ ] Update recommended mods section
 
 
@@ -98,10 +101,10 @@ The Color Dye System concept was created by [Bonesy](https://www.nexusmods.com/u
 
 I initially learned of Bonesy's Color Dye System through the [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) mod by Slim/[roryskys](https://www.nexusmods.com/users/74559688) on Nexus Mods. He is unclear on his sources/credits other than that he mentions "it was created by Bonesy" in his [YouTube video](https://www.youtube.com/watch?v=okYJVotnwYw&), but looking at his mod files Bonesy and I concluded he basically 1:1 ripped them from Vanilla++ without permission, simplifying the cube recipes to only use Perfect Gems and omit the mod-specific items Storage Bag, Empty Bottle and [Color] Bottles.
 
-For transparancy's sake, I ripped off Slim, who ripped off Bonesy, but at least I asked Bonesy for permission (and Slim for that matter but he never responded).
+For transparancy's sake: I ripped off Slim, who ripped off Bonesy, but at least I asked Bonesy for permission (and Slim for that matter but he never responded).
 
 Major thanks to:
-- [Bonesy](https://www.d2rmodding.com/) for creating the [Color Dye System](https://www.youtube.com/watch?v=LRQeFO0Y3Y4) and his overall contributions to the D2R modding community
+- [Bonesy](https://www.d2rmodding.com/) for creating the [Color Dye System](https://www.youtube.com/watch?v=LRQeFO0Y3Y4) and his numerous other contributions to the D2R modding community
   - Be sure to check out his [ReMoDDeD](https://www.d2rmodding.com/remodded) and [Vanilla++](https://www.d2rmodding.com/d2rlaunch) mods!
 - [olegbl](https://github.com/olegbl) for creating [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169)
 
