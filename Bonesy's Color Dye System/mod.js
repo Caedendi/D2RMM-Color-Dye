@@ -284,7 +284,6 @@ class CubeMainBuilder {
 
   // BROKEN: 
   // - mod2param
-  // - getStateId()
   // - target color order starts at first color (white) instead of next occurring compared to current color
   //   - black => blue, black => red, ... black => white
 
@@ -297,19 +296,8 @@ class CubeMainBuilder {
   addDyes(states) {
     let file = D2RMM.readTsv(this.target);
 
-    var debugState = [];
-    debugState[FileConstants.statesColumns.state] = `state: ${states[0].type} : ${states[0].clr} : ${states[0].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[1].type} : ${states[1].clr} : ${states[1].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[2].type} : ${states[2].clr} : ${states[2].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[3].type} : ${states[3].clr} : ${states[3].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[4].type} : ${states[4].clr} : ${states[4].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[5].type} : ${states[5].clr} : ${states[5].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[6].type} : ${states[6].clr} : ${states[6].id}`;
-    debugState[FileConstants.statesColumns.state] = `state: ${states[7].type} : ${states[7].clr} : ${states[7].id}`;
-    file.rows.push(debugState);
-
+    // create recipes for Weapon, Helm, Shield, Armor
     DyeConstants.equipment.forEach(eq => {
-
       // create Normal => Color
       DyeConstants.cubeMainColors.forEach(dyeTo => {
         let recipe = this.createNormalToColorRecipe(eq, dyeTo, states);
@@ -373,14 +361,11 @@ class CubeMainBuilder {
   }
 
   getStateId(states, type, clr) {
-    states.forEach(state => {
-
-      return `${state.type}:${state.clr}:${state.id}`;
-
+    for (const state of states) {
       if (state.type === type && state.clr === clr) {
         return state.id;
       }
-    })
+    }
 
     return "no_state_id";
   }
@@ -410,7 +395,7 @@ class CubeMainBuilder {
 
   initRecipe(recipe, description, currentColorTrackerValue, itemType, dyeItem) {
     recipe[FileConstants.cubeMainColumns.description] = description; // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
-    recipe[FileConstants.cubeMainColumns.enabled2]     = 1;
+    recipe[FileConstants.cubeMainColumns.enabled2]    = 1;
     recipe[FileConstants.cubeMainColumns.value]       = currentColorTrackerValue; // 0 normal, 1 white, 2 black, etc reset at next equip type
     recipe[FileConstants.cubeMainColumns.input1]      = itemType; // weap, helm, shld, tors
     recipe[FileConstants.cubeMainColumns.input2]      = dyeItem; // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
@@ -553,13 +538,9 @@ class StatesBuilder {
         file.rows.push(this.createColorDyeEntry(id, eq, dye)); // push new entry to end of file
         states.push({ type: eq.itemType, clr: dye.name, id: id });
         id++;
-
-        // var debugState = [];
-        // debugState[FileConstants.statesColumns.state] = `state: ${states[0].type} : ${states[0].clr} : ${states[0].id}`;
-        // file.rows.push(debugState);
       });
     });
-    
+
     D2RMM.writeTsv(this.target, file);
   }
 
