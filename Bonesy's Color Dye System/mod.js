@@ -12,12 +12,6 @@
 //   Constants   //
 //===============//
 
-class CharConstants {
-  static empty = '';
-  static newLine = "\n";
-  static newLineTxt = "\r";
-}
-
 class FileConstants {
   // extensions
   static FILE_EXTENSION_JSON = ".json";
@@ -36,8 +30,7 @@ class FileConstants {
   
   static cubeMainColumns = {
     description: "description",
-    enabled:     "*enabled",
-    enabled2:     "enabled",
+    enabled:     "enabled",
     version:     "version",
     op:          "op",
     param:       "param",
@@ -120,65 +113,28 @@ class FileConstants {
   };
 }
 
-class BaseColorConstants {
+class ColorConstants {
   static prefix = "ÿc";
-
-  // all known colors in the game code
-  // note: all numbered colors that are not a v2 are the exact same color as their non-number counterpart
-  static white           = `${this.prefix}0`;
-  static whiteSmoke      = `${this.prefix}=`;
-  static whiteSmoke2     = `${this.prefix}E`;
-  static whiteSmoke3     = `${this.prefix}F`;
-  static whiteSmoke4     = `${this.prefix}G`;
-  static whiteSmoke5     = `${this.prefix}H`;
-  static grayDim         = `${this.prefix}I`;
-  static grayDim2        = `${this.prefix}K`;
-  static grayDimmer      = `${this.prefix}5`;
-  static black           = `${this.prefix}6`;
-  static red             = `${this.prefix}U`;
-  static tomato          = `${this.prefix}1`;
-  static crimson         = `${this.prefix}S`;
-  static lime            = `${this.prefix}2`;
-  static lime2           = `${this.prefix}Q`;
-  static lime_v2         = `${this.prefix}C`;
-  static limeGreen       = `${this.prefix}<`;
-  static green           = `${this.prefix}A`;
-  static green2          = `${this.prefix}:`;
-  static deepSkyBlue     = `${this.prefix}N`;
-  static lightSkyBlue    = `${this.prefix}T`;
-  static mediumSlateBlue = `${this.prefix}P`;
-  static cornFlowerBlue  = `${this.prefix}3`;
-  static cornFlowerBlue2 = `${this.prefix}B`;
-  static yellow          = `${this.prefix}9`;
-  static lightYellow     = `${this.prefix}R`;
-  static orange          = `${this.prefix}8`;
-  static orange1         = `${this.prefix}J`;
-  static orange2         = `${this.prefix}L`;
-  static orange3         = `${this.prefix}@`;
-  static violet          = `${this.prefix}O`;
-  static darkViolet      = `${this.prefix};`;
-  static tan             = `${this.prefix}4`;
-  static tan2            = `${this.prefix}D`;
-  static tan_v2          = `${this.prefix}7`;
-  static wheat           = `${this.prefix}M`;
+  static white  = `${this.prefix}0`;
+  static gray   = `${this.prefix}5`;
+  static blue   = `${this.prefix}3`;
+  static red    = `${this.prefix}1`;
+  static green  = `${this.prefix}2`;
+  static yellow = `${this.prefix}9`;
+  static purple = `${this.prefix};`;
+  static gold   = `${this.prefix}4`;
 }
 
-class ColorConstants {
-  // loot filter colors
-  static none      = CharConstants.empty;
-  static white     = BaseColorConstants.white;
-  static gray      = BaseColorConstants.grayDimmer;
-  static black     = BaseColorConstants.black;
-  static red       = BaseColorConstants.tomato;
-  static green     = BaseColorConstants.lime;
-  static darkGreen = BaseColorConstants.green;
-  static blue      = BaseColorConstants.cornFlowerBlue;
-  static lightBlue = BaseColorConstants.lightSkyBlue;
-  static yellow    = BaseColorConstants.yellow;
-  static orange    = BaseColorConstants.orange;
-  static gold      = BaseColorConstants.tan;
-  static purple    = BaseColorConstants.darkViolet;
-  static pink      = BaseColorConstants.violet;
+class ColorNameConstants {
+  static white   = "White"
+  static black   = "Black"
+  static blue    = "Blue"
+  static red     = "Red"
+  static green   = "Green"
+  static yellow  = "Yellow"
+  static purple  = "Purple"
+  // static clear   = "Clear";
+  static tracker = "Tracker";
 }
 
 class EquipmentColorConstants {
@@ -191,7 +147,7 @@ class EquipmentColorConstants {
   static purple = "lpur";
 }
 
-class GemConstants {
+class ItemConstants {
   static perfectDiamond  = "gpw";
   static perfectSkull    = "skz";
   static perfectSapphire = "gpb";
@@ -202,36 +158,62 @@ class GemConstants {
   static antidotePotion  = "yps";
 }
 
-class DyeConstants {
-  static none   = { name: "Clear",  dyeItem: "yps", value: 0, prop: ""          };
-  static white  = { name: "White",  dyeItem: "gpw", value: 1, prop: "CD-White"  };
-  static black  = { name: "Black",  dyeItem: "skz", value: 2, prop: "CD-Black"  };
-  static blue   = { name: "Blue",   dyeItem: "gpb", value: 3, prop: "CD-Blue"   };
-  static red    = { name: "Red",    dyeItem: "gpr", value: 4, prop: "CD-Red"    };
-  static green  = { name: "Green",  dyeItem: "gpg", value: 5, prop: "CD-Green"  };
-  static yellow = { name: "Yellow", dyeItem: "gpy", value: 6, prop: "CD-Yellow" };
-  static purple = { name: "Purple", dyeItem: "gpv", value: 7, prop: "CD-Purple" };
+class cdConstants {
+  static prefix = "CD";
+  static white  = `${this.prefix}${ColorNameConstants.white}`;
+  static black  = `${this.prefix}${ColorNameConstants.black}`;
+  static blue   = `${this.prefix}${ColorNameConstants.blue}`;
+  static red    = `${this.prefix}${ColorNameConstants.red}`;
+  static green  = `${this.prefix}${ColorNameConstants.green}`;
+  static yellow = `${this.prefix}${ColorNameConstants.yellow}`;
+  static purple = `${this.prefix}${ColorNameConstants.purple}`;
+}
 
+class cdUnderscoreConstants {
+  static prefix  = "CD_";
+  static white   = `${this.prefix}${ColorNameConstants.white}`;
+  static black   = `${this.prefix}${ColorNameConstants.black}`;
+  static blue    = `${this.prefix}${ColorNameConstants.blue}`;
+  static red     = `${this.prefix}${ColorNameConstants.red}`;
+  static green   = `${this.prefix}${ColorNameConstants.green}`;
+  static yellow  = `${this.prefix}${ColorNameConstants.yellow}`;
+  static purple  = `${this.prefix}${ColorNameConstants.purple}`;
+  static tracker = `${this.prefix}${ColorNameConstants.tracker}`;
+}
+
+class cdDashConstants {
+  static prefix  = "CD-";
+  static white   = `${this.prefix}${ColorNameConstants.white}`;
+  static black   = `${this.prefix}${ColorNameConstants.black}`;
+  static blue    = `${this.prefix}${ColorNameConstants.blue}`;
+  static red     = `${this.prefix}${ColorNameConstants.red}`;
+  static green   = `${this.prefix}${ColorNameConstants.green}`
+  static yellow  = `${this.prefix}${ColorNameConstants.yellow}`;
+  static purple  = `${this.prefix}${ColorNameConstants.purple}`;
+  static tracker = `${this.prefix}${ColorNameConstants.tracker}`;
+}
+
+class DyeConstants {
   static itemStatCosts = [
-    { stat: "CD_White",   descStrPosNeg: "CDWhite",  isClr: true  }, 
-    { stat: "CD_Black",   descStrPosNeg: "CDBlack",  isClr: true  }, 
-    { stat: "CD_Blue",    descStrPosNeg: "CDBlue",   isClr: true  }, 
-    { stat: "CD_Red",     descStrPosNeg: "CDRed",    isClr: true  }, 
-    { stat: "CD_Green",   descStrPosNeg: "CDGreen",  isClr: true  }, 
-    { stat: "CD_Yellow",  descStrPosNeg: "CDYellow", isClr: true  }, 
-    { stat: "CD_Purple",  descStrPosNeg: "CDPurple", isClr: true  }, 
-    { stat: "CD_Tracker", descStrPosNeg: "",         isClr: false }, 
+    { stat: cdUnderscoreConstants.white,   descStrPosNeg: cdConstants.white,  isClr: true  }, 
+    { stat: cdUnderscoreConstants.black,   descStrPosNeg: cdConstants.black,  isClr: true  }, 
+    { stat: cdUnderscoreConstants.blue,    descStrPosNeg: cdConstants.blue,   isClr: true  }, 
+    { stat: cdUnderscoreConstants.red,     descStrPosNeg: cdConstants.red,    isClr: true  }, 
+    { stat: cdUnderscoreConstants.green,   descStrPosNeg: cdConstants.green,  isClr: true  }, 
+    { stat: cdUnderscoreConstants.yellow,  descStrPosNeg: cdConstants.yellow, isClr: true  }, 
+    { stat: cdUnderscoreConstants.purple,  descStrPosNeg: cdConstants.purple, isClr: true  }, 
+    { stat: cdUnderscoreConstants.tracker, descStrPosNeg: "",                 isClr: false }, 
   ];
 
   static properties = [
-    { code: "CD-White",   stat1: "CD_White"   }, 
-    { code: "CD-Black",   stat1: "CD_Black"   }, 
-    { code: "CD-Blue",    stat1: "CD_Blue"    }, 
-    { code: "CD-Red",     stat1: "CD_Red"     }, 
-    { code: "CD-Green",   stat1: "CD_Green"   }, 
-    { code: "CD-Yellow",  stat1: "CD_Yellow"  }, 
-    { code: "CD-Purple",  stat1: "CD_Purple"  }, 
-    { code: "CD-Tracker", stat1: "CD_Tracker" }, 
+    { code: cdDashConstants.white,   stat1: cdUnderscoreConstants.white,   }, 
+    { code: cdDashConstants.black,   stat1: cdUnderscoreConstants.black,   }, 
+    { code: cdDashConstants.blue,    stat1: cdUnderscoreConstants.blue,    }, 
+    { code: cdDashConstants.red,     stat1: cdUnderscoreConstants.red,     }, 
+    { code: cdDashConstants.green,   stat1: cdUnderscoreConstants.green,   }, 
+    { code: cdDashConstants.yellow,  stat1: cdUnderscoreConstants.yellow,  }, 
+    { code: cdDashConstants.purple,  stat1: cdUnderscoreConstants.purple,  }, 
+    { code: cdDashConstants.tracker, stat1: cdUnderscoreConstants.tracker, }, 
   ];
 
   static equipment = [
@@ -242,36 +224,36 @@ class DyeConstants {
   ];
 
   static cubeMainColors = [
-    { name: "White",  itemCode: GemConstants.perfectDiamond,  trackerValue: 1 }, 
-    { name: "Black",  itemCode: GemConstants.perfectSkull,    trackerValue: 2 }, 
-    { name: "Blue",   itemCode: GemConstants.perfectSapphire, trackerValue: 3 }, 
-    { name: "Red",    itemCode: GemConstants.perfectRuby,     trackerValue: 4 }, 
-    { name: "Green",  itemCode: GemConstants.perfectEmerald,  trackerValue: 5 }, 
-    { name: "Yellow", itemCode: GemConstants.perfectTopaz,    trackerValue: 6 }, 
-    { name: "Purple", itemCode: GemConstants.perfectAmethyst, trackerValue: 7 } 
+    { name: ColorNameConstants.white,  itemCode: ItemConstants.perfectDiamond,  trackerValue: 1 }, 
+    { name: ColorNameConstants.black,  itemCode: ItemConstants.perfectSkull,    trackerValue: 2 }, 
+    { name: ColorNameConstants.blue,   itemCode: ItemConstants.perfectSapphire, trackerValue: 3 }, 
+    { name: ColorNameConstants.red,    itemCode: ItemConstants.perfectRuby,     trackerValue: 4 }, 
+    { name: ColorNameConstants.green,  itemCode: ItemConstants.perfectEmerald,  trackerValue: 5 }, 
+    { name: ColorNameConstants.yellow, itemCode: ItemConstants.perfectTopaz,    trackerValue: 6 }, 
+    { name: ColorNameConstants.purple, itemCode: ItemConstants.perfectAmethyst, trackerValue: 7 } 
   ];
 
-  static cubeMainClear = { itemCode: GemConstants.antidotePotion, trackerValue: 0 };
+  static cubeMainClear = { itemCode: ItemConstants.antidotePotion, trackerValue: 0 };
 
   static statesColors = [
-    { name: "White",  itemTrans: EquipmentColorConstants.white  }, 
-    { name: "Black",  itemTrans: EquipmentColorConstants.black  }, 
-    { name: "Blue",   itemTrans: EquipmentColorConstants.blue   }, 
-    { name: "Red",    itemTrans: EquipmentColorConstants.red    }, 
-    { name: "Green",  itemTrans: EquipmentColorConstants.green  }, 
-    { name: "Yellow", itemTrans: EquipmentColorConstants.yellow }, 
-    { name: "Purple", itemTrans: EquipmentColorConstants.purple }, 
+    { name: ColorNameConstants.white,  itemTrans: EquipmentColorConstants.white  }, 
+    { name: ColorNameConstants.black,  itemTrans: EquipmentColorConstants.black  }, 
+    { name: ColorNameConstants.blue,   itemTrans: EquipmentColorConstants.blue   }, 
+    { name: ColorNameConstants.red,    itemTrans: EquipmentColorConstants.red    }, 
+    { name: ColorNameConstants.green,  itemTrans: EquipmentColorConstants.green  }, 
+    { name: ColorNameConstants.yellow, itemTrans: EquipmentColorConstants.yellow }, 
+    { name: ColorNameConstants.purple, itemTrans: EquipmentColorConstants.purple }, 
   ];
 
-  // todo: make id scalable.
-  static itemModifers = [ // order/ids match the original ColorDye item-modifiers.json file
-    { id: 48000, name: "White",  clr: ColorConstants.white  },
-    { id: 48001, name: "Black",  clr: ColorConstants.gray   },
-    { id: 48002, name: "Blue",   clr: ColorConstants.blue   },
-    { id: 48003, name: "Red",    clr: ColorConstants.red    },
-    { id: 48004, name: "Green",  clr: ColorConstants.green  },
-    { id: 48005, name: "Yellow", clr: ColorConstants.yellow },
-    { id: 48006, name: "Purple", clr: ColorConstants.purple },
+  // order/ids match the original ColorDye item-modifiers.json file. todo: make id scalable.
+  static itemModifers = [
+    { id: 48000, name: ColorNameConstants.white,  clr: ColorConstants.white  },
+    { id: 48001, name: ColorNameConstants.black,  clr: ColorConstants.gray   },
+    { id: 48002, name: ColorNameConstants.blue,   clr: ColorConstants.blue   },
+    { id: 48003, name: ColorNameConstants.red,    clr: ColorConstants.red    },
+    { id: 48004, name: ColorNameConstants.green,  clr: ColorConstants.green  },
+    { id: 48005, name: ColorNameConstants.yellow, clr: ColorConstants.yellow },
+    { id: 48006, name: ColorNameConstants.purple, clr: ColorConstants.purple },
   ];
 }
 
@@ -281,12 +263,6 @@ class DyeConstants {
 //====================================//
 
 class CubeMainBuilder {
-
-  // BROKEN: 
-  // - mod2param
-  // - target color order starts at first color (white) instead of next occurring compared to current color
-  //   - black => blue, black => red, ... black => white
-
   target = FileConstants.FILE_PATH_CUBEMAIN;
 
   build(states) {
@@ -394,11 +370,10 @@ class CubeMainBuilder {
   }
 
   initRecipe(recipe, description, currentColorTrackerValue, itemType, dyeItem) {
-    recipe[FileConstants.cubeMainColumns.description] = description; // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
-    recipe[FileConstants.cubeMainColumns.enabled2]    = 1;
+    recipe[FileConstants.cubeMainColumns.description] = description;              // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
     recipe[FileConstants.cubeMainColumns.value]       = currentColorTrackerValue; // 0 normal, 1 white, 2 black, etc reset at next equip type
-    recipe[FileConstants.cubeMainColumns.input1]      = itemType; // weap, helm, shld, tors
-    recipe[FileConstants.cubeMainColumns.input2]      = dyeItem; // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
+    recipe[FileConstants.cubeMainColumns.input1]      = itemType;                 // weap, helm, shld, tors
+    recipe[FileConstants.cubeMainColumns.input2]      = dyeItem;                  // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
   }
 
   addColor(recipe, targetColor, targetColorStateId, trackerValue) {
@@ -418,7 +393,7 @@ class CubeMainBuilder {
   }
 
   addMod12(recipe, targetClr, value, stateId) {
-    recipe[FileConstants.cubeMainColumns.mod1]      = `CD-${targetClr}`;
+    recipe[FileConstants.cubeMainColumns.mod1]      = `${cdDashConstants.prefix}${targetClr}`;
     recipe[FileConstants.cubeMainColumns.mod1min]   = value;
     recipe[FileConstants.cubeMainColumns.mod1max]   = value;
     recipe[FileConstants.cubeMainColumns.mod2]      = FileConstants.statesColumns.state;
@@ -428,19 +403,19 @@ class CubeMainBuilder {
   }
 
   addMod3(recipe, value) {
-    recipe[FileConstants.cubeMainColumns.mod3] = "CD-Tracker"; // todo: fix magic string in DyeConstants.properties
+    recipe[FileConstants.cubeMainColumns.mod3]    = `${cdDashConstants.tracker}`;
     recipe[FileConstants.cubeMainColumns.mod3min] = value;
     recipe[FileConstants.cubeMainColumns.mod3max] = value;
   }
 
   addMod45(recipe, currentClr, stateId) {
-    recipe[FileConstants.cubeMainColumns.mod4] = `CD-${currentClr}`;
-    recipe[FileConstants.cubeMainColumns.mod4min] = -1;
-    recipe[FileConstants.cubeMainColumns.mod4max] = -1;
-    recipe[FileConstants.cubeMainColumns.mod5] = FileConstants.statesColumns.state;
+    recipe[FileConstants.cubeMainColumns.mod4]      = `${cdDashConstants.prefix}${currentClr}`;
+    recipe[FileConstants.cubeMainColumns.mod4min]   = -1;
+    recipe[FileConstants.cubeMainColumns.mod4max]   = -1;
+    recipe[FileConstants.cubeMainColumns.mod5]      = FileConstants.statesColumns.state;
     recipe[FileConstants.cubeMainColumns.mod5param] = stateId;
-    recipe[FileConstants.cubeMainColumns.mod5min] = -1;
-    recipe[FileConstants.cubeMainColumns.mod5max] = -1;
+    recipe[FileConstants.cubeMainColumns.mod5min]   = -1;
+    recipe[FileConstants.cubeMainColumns.mod5max]   = -1;
   }
 }
 
@@ -456,7 +431,7 @@ class ItemStatCostBuilder {
 
     let id = file.rows.length;
     DyeConstants.itemStatCosts.forEach(dye => {
-      file.rows.push(this.createColorDyeEntry(id, dye)); // push new entry to end of file
+      file.rows.push(this.createColorDyeEntry(id, dye));
       id++;
     });
     
@@ -502,7 +477,7 @@ class PropertiesBuilder {
 
     let id = file.rows.length;
     DyeConstants.properties.forEach(dye => {
-      file.rows.push(this.createColorDyeEntry(dye)); // push new entry to end of file
+      file.rows.push(this.createColorDyeEntry(dye));
       id++;
     });
     
@@ -535,7 +510,7 @@ class StatesBuilder {
     let id = file.rows.length;
     DyeConstants.equipment.forEach(eq => {
       DyeConstants.statesColors.forEach(dye => {
-        file.rows.push(this.createColorDyeEntry(id, eq, dye)); // push new entry to end of file
+        file.rows.push(this.createColorDyeEntry(id, eq, dye));
         states.push({ type: eq.itemType, clr: dye.name, id: id });
         id++;
       });
@@ -571,8 +546,9 @@ class ItemModifiersBuilder {
 
   addDyes() {
     let file = D2RMM.readJson(this.target);
-    DyeConstants.itemModifers.forEach(dye => { 
-      file.push(this.createEntry(dye.id, `CD${dye.name}`, `${ColorConstants.gold}Color Dyed: ${dye.clr}${dye.name}`)); // push new entry to end of file
+    DyeConstants.itemModifers.forEach(dye => {
+      let newEntry = this.createEntry(dye.id, `${cdConstants.prefix}${dye.name}`, `${ColorConstants.gold}Color Dyed: ${dye.clr}${dye.name}`);
+      file.push(newEntry);
     });
     D2RMM.writeJson(this.target, file);
   }
