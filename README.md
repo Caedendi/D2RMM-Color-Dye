@@ -56,6 +56,8 @@ This mod adds new entries to the following files:
 
 \* _The highest entry in item-modifiers.json has ID 27374 (even though the game does not utilize all available IDs up to that number). To prevent incompatibility with a future game update, this mod mirrors Bonesy's Vanilla++ (and Slim for that matter) by starting the new entries at ID 48000. All other entries use the first available IDs so scale with other mods._
 
+This mod assumes that the last entry in item-modifiers.json has the highest ID number (as when properly sequentially ordered). If not, it may overwrite existing values.
+
 ## Known Issues
 
 None at the moment.
