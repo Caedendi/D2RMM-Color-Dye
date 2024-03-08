@@ -200,42 +200,6 @@ class cdConstants {
 }
 
 class DyeConstants {
-  // itemstatcost.txt section
-  static itemStatCosts = [
-    { stat: cdConstants.underscore.white,   descStrPosNeg: cdConstants.short.white,  isClr: true  }, 
-    { stat: cdConstants.underscore.black,   descStrPosNeg: cdConstants.short.black,  isClr: true  }, 
-    { stat: cdConstants.underscore.blue,    descStrPosNeg: cdConstants.short.blue,   isClr: true  }, 
-    { stat: cdConstants.underscore.red,     descStrPosNeg: cdConstants.short.red,    isClr: true  }, 
-    { stat: cdConstants.underscore.green,   descStrPosNeg: cdConstants.short.green,  isClr: true  }, 
-    { stat: cdConstants.underscore.yellow,  descStrPosNeg: cdConstants.short.yellow, isClr: true  }, 
-    { stat: cdConstants.underscore.purple,  descStrPosNeg: cdConstants.short.purple, isClr: true  }, 
-    { stat: cdConstants.underscore.tracker, descStrPosNeg: "",                       isClr: false }, 
-  ];
-
-  // properties.txt section
-  static properties = [
-    { code: cdConstants.dash.white,   stat1: cdConstants.underscore.white,   }, 
-    { code: cdConstants.dash.black,   stat1: cdConstants.underscore.black,   }, 
-    { code: cdConstants.dash.blue,    stat1: cdConstants.underscore.blue,    }, 
-    { code: cdConstants.dash.red,     stat1: cdConstants.underscore.red,     }, 
-    { code: cdConstants.dash.green,   stat1: cdConstants.underscore.green,   }, 
-    { code: cdConstants.dash.yellow,  stat1: cdConstants.underscore.yellow,  }, 
-    { code: cdConstants.dash.purple,  stat1: cdConstants.underscore.purple,  }, 
-    { code: cdConstants.dash.tracker, stat1: cdConstants.underscore.tracker, }, 
-  ];
-
-  // states.txt section
-  static statesColors = [
-    { name: ColorConstants.names.white,  itemTrans: ColorConstants.equipment.white  }, 
-    { name: ColorConstants.names.black,  itemTrans: ColorConstants.equipment.black  }, 
-    { name: ColorConstants.names.blue,   itemTrans: ColorConstants.equipment.blue   }, 
-    { name: ColorConstants.names.red,    itemTrans: ColorConstants.equipment.red    }, 
-    { name: ColorConstants.names.green,  itemTrans: ColorConstants.equipment.green  }, 
-    { name: ColorConstants.names.yellow, itemTrans: ColorConstants.equipment.yellow }, 
-    { name: ColorConstants.names.purple, itemTrans: ColorConstants.equipment.purple }, 
-  ];
-
-  // cubemain.txt section
   static equipment = [
     { name: "Weapon", itemType: "weap" }, 
     { name: "Helm",   itemType: "helm" }, 
@@ -243,27 +207,63 @@ class DyeConstants {
     { name: "Armor",  itemType: "tors" }, 
   ];
 
-  static cubeMainColors = [
-    { name: ColorConstants.names.white,  itemCode: ItemConstants.perfectDiamond,  trackerValue: 1 }, 
-    { name: ColorConstants.names.black,  itemCode: ItemConstants.perfectSkull,    trackerValue: 2 }, 
-    { name: ColorConstants.names.blue,   itemCode: ItemConstants.perfectSapphire, trackerValue: 3 }, 
-    { name: ColorConstants.names.red,    itemCode: ItemConstants.perfectRuby,     trackerValue: 4 }, 
-    { name: ColorConstants.names.green,  itemCode: ItemConstants.perfectEmerald,  trackerValue: 5 }, 
-    { name: ColorConstants.names.yellow, itemCode: ItemConstants.perfectTopaz,    trackerValue: 6 }, 
-    { name: ColorConstants.names.purple, itemCode: ItemConstants.perfectAmethyst, trackerValue: 7 } 
+  // itemstatcost.txt section
+  static itemStatCost = [
+    { statId: cdConstants.underscore.white,   descStrPosNeg: cdConstants.short.white,  isClr: true  }, 
+    { statId: cdConstants.underscore.black,   descStrPosNeg: cdConstants.short.black,  isClr: true  }, 
+    { statId: cdConstants.underscore.blue,    descStrPosNeg: cdConstants.short.blue,   isClr: true  }, 
+    { statId: cdConstants.underscore.red,     descStrPosNeg: cdConstants.short.red,    isClr: true  }, 
+    { statId: cdConstants.underscore.green,   descStrPosNeg: cdConstants.short.green,  isClr: true  }, 
+    { statId: cdConstants.underscore.yellow,  descStrPosNeg: cdConstants.short.yellow, isClr: true  }, 
+    { statId: cdConstants.underscore.purple,  descStrPosNeg: cdConstants.short.purple, isClr: true  }, 
+    { statId: cdConstants.underscore.tracker, descStrPosNeg: "",                       isClr: false }, 
+  ];
+
+  // properties.txt section
+  static properties = [
+    { propertyId: cdConstants.dash.white,   statId: cdConstants.underscore.white   }, 
+    { propertyId: cdConstants.dash.black,   statId: cdConstants.underscore.black   }, 
+    { propertyId: cdConstants.dash.blue,    statId: cdConstants.underscore.blue    }, 
+    { propertyId: cdConstants.dash.red,     statId: cdConstants.underscore.red     }, 
+    { propertyId: cdConstants.dash.green,   statId: cdConstants.underscore.green   }, 
+    { propertyId: cdConstants.dash.yellow,  statId: cdConstants.underscore.yellow  }, 
+    { propertyId: cdConstants.dash.purple,  statId: cdConstants.underscore.purple  }, 
+    { propertyId: cdConstants.dash.tracker, statId: cdConstants.underscore.tracker }, 
+  ];
+
+  // states.txt section
+  static states = [
+    { clrName: ColorConstants.names.white,  eqClrCode: ColorConstants.equipment.white  }, 
+    { clrName: ColorConstants.names.black,  eqClrCode: ColorConstants.equipment.black  }, 
+    { clrName: ColorConstants.names.blue,   eqClrCode: ColorConstants.equipment.blue   }, 
+    { clrName: ColorConstants.names.red,    eqClrCode: ColorConstants.equipment.red    }, 
+    { clrName: ColorConstants.names.green,  eqClrCode: ColorConstants.equipment.green  }, 
+    { clrName: ColorConstants.names.yellow, eqClrCode: ColorConstants.equipment.yellow }, 
+    { clrName: ColorConstants.names.purple, eqClrCode: ColorConstants.equipment.purple }, 
+  ];
+
+  // cubemain.txt section
+  static cubeMain = [
+    { clrName: ColorConstants.names.white,  itemCode: ItemConstants.perfectDiamond,  trackerValue: 1 }, 
+    { clrName: ColorConstants.names.black,  itemCode: ItemConstants.perfectSkull,    trackerValue: 2 }, 
+    { clrName: ColorConstants.names.blue,   itemCode: ItemConstants.perfectSapphire, trackerValue: 3 }, 
+    { clrName: ColorConstants.names.red,    itemCode: ItemConstants.perfectRuby,     trackerValue: 4 }, 
+    { clrName: ColorConstants.names.green,  itemCode: ItemConstants.perfectEmerald,  trackerValue: 5 }, 
+    { clrName: ColorConstants.names.yellow, itemCode: ItemConstants.perfectTopaz,    trackerValue: 6 }, 
+    { clrName: ColorConstants.names.purple, itemCode: ItemConstants.perfectAmethyst, trackerValue: 7 } 
   ];
 
   static cubeMainClear = { itemCode: ItemConstants.antidotePotion, trackerValue: 0 };
 
   // item-modifiers.json section
   static itemModifers = [ // order/ids match the original ColorDye item-modifiers.json file. todo: make id scalable.
-    { name: ColorConstants.names.white,  clr: ColorConstants.codes.white  },
-    { name: ColorConstants.names.black,  clr: ColorConstants.codes.gray   },
-    { name: ColorConstants.names.blue,   clr: ColorConstants.codes.blue   },
-    { name: ColorConstants.names.red,    clr: ColorConstants.codes.red    },
-    { name: ColorConstants.names.green,  clr: ColorConstants.codes.green  },
-    { name: ColorConstants.names.yellow, clr: ColorConstants.codes.yellow },
-    { name: ColorConstants.names.purple, clr: ColorConstants.codes.purple },
+    { clrName: ColorConstants.names.white,  clrCode: ColorConstants.codes.white  },
+    { clrName: ColorConstants.names.black,  clrCode: ColorConstants.codes.gray   },
+    { clrName: ColorConstants.names.blue,   clrCode: ColorConstants.codes.blue   },
+    { clrName: ColorConstants.names.red,    clrCode: ColorConstants.codes.red    },
+    { clrName: ColorConstants.names.green,  clrCode: ColorConstants.codes.green  },
+    { clrName: ColorConstants.names.yellow, clrCode: ColorConstants.codes.yellow },
+    { clrName: ColorConstants.names.purple, clrCode: ColorConstants.codes.purple },
   ];
 }
 
@@ -285,14 +285,14 @@ class CubeMainBuilder {
     // create recipes for Weapon, Helm, Shield, Armor
     DyeConstants.equipment.forEach(eq => {
       // create Normal => Color
-      DyeConstants.cubeMainColors.forEach(dyeTo => {
+      DyeConstants.cubeMain.forEach(dyeTo => {
         file.rows.push(this.createNormalToColorRecipe(eq, dyeTo, states));
       });
 
       // create Color => Color 
-      DyeConstants.cubeMainColors.forEach(dyeFrom => {
-        DyeConstants.cubeMainColors.forEach(dyeTo => {
-          if (dyeFrom.name === dyeTo.name) {
+      DyeConstants.cubeMain.forEach(dyeFrom => {
+        DyeConstants.cubeMain.forEach(dyeTo => {
+          if (dyeFrom.clrName === dyeTo.clrName) {
             return;
           }
           file.rows.push(this.createColorToColorRecipe(eq, dyeFrom, dyeTo, states));
@@ -307,35 +307,35 @@ class CubeMainBuilder {
   }
 
   createNormalToColorRecipe(eq, dyeTo, states) {
-    let desc = this.createDescription(eq.name, ColorConstants.names.normal, dyeTo.name);
-    let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.name);
+    let desc = this.createDescription(eq.name, ColorConstants.names.normal, dyeTo.clrName);
+    let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.clrName);
     let trackerValue = this.calculateTrackerValue(0, dyeTo.trackerValue);
 
     let recipe = this.createRecipeBase(desc, 0, eq.itemType, dyeTo.itemCode);
-    this.addColor(recipe, dyeTo.name, targetColorStateId, trackerValue);
+    this.addColor(recipe, dyeTo.clrName, targetColorStateId, trackerValue);
 
     return recipe;
   }
 
   createColorToColorRecipe(eq, dyeFrom, dyeTo, states) {
-    let desc = this.createDescription(eq.name, dyeFrom.name, dyeTo.name);
-    let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.name);
-    let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.name);
+    let desc = this.createDescription(eq.name, dyeFrom.clrName, dyeTo.clrName);
+    let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.clrName);
+    let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.clrName);
     let trackerDiffValue = this.calculateTrackerValue(dyeFrom.trackerValue, dyeTo.trackerValue);
 
     let recipe = this.createRecipeBase(desc, dyeFrom.trackerValue, eq.itemType, dyeTo.itemCode);
-    this.changeColor(recipe, dyeFrom.name, currentColorStateId, dyeTo.name, targetColorStateId, trackerDiffValue);
+    this.changeColor(recipe, dyeFrom.clrName, currentColorStateId, dyeTo.clrName, targetColorStateId, trackerDiffValue);
 
     return recipe;
   }
 
   createColorToNormalRecipe(eq, dyeFrom, states) {
-    let desc = this.createDescription(eq.name, dyeFrom.name, ColorConstants.names.clear);
-    let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.name);
+    let desc = this.createDescription(eq.name, dyeFrom.clrName, ColorConstants.names.clear);
+    let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.clrName);
     let trackerValue = this.calculateTrackerValue(dyeFrom.trackerValue, 0);
 
     let recipe = this.createRecipeBase(desc, dyeFrom.trackerValue, eq.itemType, DyeConstants.cubeMainClear.itemCode);
-    this.clearColor(recipe, dyeFrom.name, currentColorStateId, trackerValue)
+    this.clearColor(recipe, dyeFrom.clrName, currentColorStateId, trackerValue)
 
     return recipe;
   }
@@ -438,22 +438,22 @@ class ItemStatCostBuilder {
   addDyes() {
     let file = D2RMM.readTsv(this.target);
 
-    let id = file.rows.length;
-    DyeConstants.itemStatCosts.forEach(dye => {
-      file.rows.push(this.createColorDyeEntry(id, dye));
+    let index = file.rows.length;
+    DyeConstants.itemStatCost.forEach(dye => {
+      file.rows.push(this.createColorDyeEntry(index, dye));
       id++;
     });
     
     D2RMM.writeTsv(this.target, file);
   }
 
-  createColorDyeEntry(id, dye) {
+  createColorDyeEntry(index, dye) {
     let entry = {};
 
     // todo: change bit values (Bonesy trademark)
 
-    entry[FileConstants.itemStatCostColums.stat]        = dye.stat;
-    entry[FileConstants.itemStatCostColums.id]          = id;
+    entry[FileConstants.itemStatCostColums.stat]        = dye.statId;
+    entry[FileConstants.itemStatCostColums.id]          = index;
     entry[FileConstants.itemStatCostColums.sendBits]    = 16;
     entry[FileConstants.itemStatCostColums.add]         = 102;
     entry[FileConstants.itemStatCostColums.multiply]    = 20;
@@ -498,10 +498,10 @@ class PropertiesBuilder {
   createColorDyeEntry(dye) {
     let entry = {};
 
-    entry[FileConstants.propertiesColumns.code]    = dye.code;
+    entry[FileConstants.propertiesColumns.code]    = dye.propertyId;
     entry[FileConstants.propertiesColumns.enabled] = 1;
     entry[FileConstants.propertiesColumns.func1]   = 17;
-    entry[FileConstants.propertiesColumns.stat1]   = dye.stat1;
+    entry[FileConstants.propertiesColumns.stat1]   = dye.statId;
     entry[FileConstants.itemStatCostColums.eol]    = 0;
     
     return entry;
@@ -520,9 +520,9 @@ class StatesBuilder {
 
     let id = file.rows.length;
     DyeConstants.equipment.forEach(eq => {
-      DyeConstants.statesColors.forEach(dye => {
+      DyeConstants.states.forEach(dye => {
         file.rows.push(this.createColorDyeEntry(id, eq, dye));
-        states.push({ type: eq.itemType, clr: dye.name, id: id }); // referenced in cubemain.txt
+        states.push({ type: eq.itemType, clr: dye.name, id: id }); // these new states will be referenced in cubemain.txt, so we need to save these for later
         id++;
       });
     });
@@ -533,10 +533,10 @@ class StatesBuilder {
   createColorDyeEntry(id, eq, dye) {
     let entry = {};
 
-    entry[FileConstants.statesColumns.state]     = `${eq.name}_${dye.name}`;
+    entry[FileConstants.statesColumns.state]     = `${eq.name}_${dye.clrName}`;
     entry[FileConstants.statesColumns.id]        = id;
     entry[FileConstants.statesColumns.itemType]  = eq.itemType;
-    entry[FileConstants.statesColumns.itemTrans] = dye.itemTrans;
+    entry[FileConstants.statesColumns.itemTrans] = dye.eqClrCode;
     entry[FileConstants.statesColumns.eol]       = 0;
     
     return entry;
@@ -560,25 +560,23 @@ class ItemModifiersBuilder {
 
     let id = this.determineFirstId(file, 48000);
     DyeConstants.itemModifers.forEach(dye => {
-      let newEntry = this.createEntry(id, `${cdConstants.prefixShort}${dye.name}`, `${ColorConstants.codes.gold}Color Dyed: ${dye.clr}${dye.name}`);
-      file.push(newEntry);
+      file.push(this.createEntry(id, dye));
       id++;
     });
 
     D2RMM.writeJson(this.target, file);
   }
 
-  createEntry(id, key, value) {
+  createEntry(id, dye) {
     let entry = {};
     entry[FileConstants.jsonProperties.id]  = id;
-    entry[FileConstants.jsonProperties.key] = key;
+    entry[FileConstants.jsonProperties.key] = `${cdConstants.prefixShort}${dye.clrName}`;
 
     Object.values(FileConstants.jsonProperties).forEach(prop => {
-      if ( prop === FileConstants.jsonProperties.id
-        || prop === FileConstants.jsonProperties.key) {
+      if ( prop === FileConstants.jsonProperties.id || prop === FileConstants.jsonProperties.key) {
         return;
       }
-        entry[prop] = value;
+      entry[prop] = `${ColorConstants.codes.gold}Color Dyed: ${dye.clrCode}${dye.clrName}`;
     });
 
     return entry;
