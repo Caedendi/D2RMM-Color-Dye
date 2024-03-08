@@ -345,7 +345,7 @@ class CubeMainBuilder {
   }
 
   findStateId(states, type, clr) {
-    return states.find(state => state.type === type && state.clr === clr);
+    return states.find(state => state.type === type && state.clr === clr).id;
 
     // todo: test & delete
     for (const state of states) {
@@ -584,10 +584,11 @@ class ItemModifiersBuilder {
     return entry;
   }
 
-  // todo: test
+  // todo: fix (=broken)
   // assumes item-modifiers.json is properly sequentially ordered. returns the provided startingPoint if it is available, else returns the highest ID + 1.
   determineFirstId(file, preferredId) {
-    let lastId = file.slice(-1).id;
+    // let lastId = file.slice(-1).id;
+    let lastId = file.slice(-1)[FileConstants.jsonProperties.id];
     if (lastId < preferredId) {
       return preferredId;
     }
