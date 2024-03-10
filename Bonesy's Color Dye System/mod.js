@@ -207,19 +207,16 @@ class DyeConstants {
     { name: "Armor",  itemType: "tors" }, 
   ];
 
-  // itemstatcost.txt section
   static itemStatCost = [
-    { statId: cdConstants.underscore.white,   descStrPosNeg: cdConstants.short.white,  isClr: true  }, 
-    { statId: cdConstants.underscore.black,   descStrPosNeg: cdConstants.short.black,  isClr: true  }, 
-    { statId: cdConstants.underscore.blue,    descStrPosNeg: cdConstants.short.blue,   isClr: true  }, 
-    { statId: cdConstants.underscore.red,     descStrPosNeg: cdConstants.short.red,    isClr: true  }, 
-    { statId: cdConstants.underscore.green,   descStrPosNeg: cdConstants.short.green,  isClr: true  }, 
-    { statId: cdConstants.underscore.yellow,  descStrPosNeg: cdConstants.short.yellow, isClr: true  }, 
-    { statId: cdConstants.underscore.purple,  descStrPosNeg: cdConstants.short.purple, isClr: true  }, 
-    { statId: cdConstants.underscore.tracker, descStrPosNeg: "",                       isClr: false }, 
+    { statId: cdConstants.underscore.white,   descStrPosNeg: cdConstants.short.white  }, 
+    { statId: cdConstants.underscore.black,   descStrPosNeg: cdConstants.short.black  }, 
+    { statId: cdConstants.underscore.blue,    descStrPosNeg: cdConstants.short.blue   }, 
+    { statId: cdConstants.underscore.red,     descStrPosNeg: cdConstants.short.red    }, 
+    { statId: cdConstants.underscore.green,   descStrPosNeg: cdConstants.short.green  }, 
+    { statId: cdConstants.underscore.yellow,  descStrPosNeg: cdConstants.short.yellow }, 
+    { statId: cdConstants.underscore.purple,  descStrPosNeg: cdConstants.short.purple }, 
   ];
 
-  // properties.txt section
   static properties = [
     { propertyId: cdConstants.dash.white,   statId: cdConstants.underscore.white   }, 
     { propertyId: cdConstants.dash.black,   statId: cdConstants.underscore.black   }, 
@@ -231,7 +228,6 @@ class DyeConstants {
     { propertyId: cdConstants.dash.tracker, statId: cdConstants.underscore.tracker }, 
   ];
 
-  // states.txt section
   static states = [
     { clrName: ColorConstants.names.white,  eqClrCode: ColorConstants.equipment.white  }, 
     { clrName: ColorConstants.names.black,  eqClrCode: ColorConstants.equipment.black  }, 
@@ -242,7 +238,6 @@ class DyeConstants {
     { clrName: ColorConstants.names.purple, eqClrCode: ColorConstants.equipment.purple }, 
   ];
 
-  // cubemain.txt section
   static cubeMain = [
     { clrName: ColorConstants.names.white,  itemCode: ItemConstants.perfectDiamond,  trackerValue: 1 }, 
     { clrName: ColorConstants.names.black,  itemCode: ItemConstants.perfectSkull,    trackerValue: 2 }, 
@@ -255,7 +250,6 @@ class DyeConstants {
 
   static cubeMainClear = { itemCode: ItemConstants.antidotePotion, trackerValue: 0 };
 
-  // item-modifiers.json section
   static itemModifers = [
     { clrName: ColorConstants.names.white,  clrCode: ColorConstants.codes.white  },
     { clrName: ColorConstants.names.black,  clrCode: ColorConstants.codes.gray   },
@@ -275,18 +269,18 @@ class DyeConstants {
 class CubeMainBuilder {
   target = FileConstants.FILE_PATH_CUBEMAIN;
 
-  build(states) {
-    this.addDyes(states);
+  build(colorDyeGlobals) {
+    this.addDyes(colorDyeGlobals);
   }
 
-  addDyes(states) {
+  addDyes(colorDyeGlobals) {
     let file = D2RMM.readTsv(this.target);
 
     // create recipes for Weapon, Helm, Shield, Armor
     DyeConstants.equipment.forEach(eq => {
       // create Normal => Color
       DyeConstants.cubeMain.forEach(dyeTo => {
-        file.rows.push(this.createNormalToColorRecipe(eq, dyeTo, states));
+        file.rows.push(this.createNormalToColorRecipe(eq, dyeTo, colorDyeGlobals.states, colorDyeGlobals.trackerStatId));
       });
 
       // create Color => Color 
@@ -295,46 +289,46 @@ class CubeMainBuilder {
           if (dyeFrom.clrName === dyeTo.clrName) {
             return;
           }
-          file.rows.push(this.createColorToColorRecipe(eq, dyeFrom, dyeTo, states));
+          file.rows.push(this.createColorToColorRecipe(eq, dyeFrom, dyeTo, colorDyeGlobals.states, colorDyeGlobals.trackerStatId));
         });
         
         // create Color => Clear
-        file.rows.push(this.createColorToNormalRecipe(eq, dyeFrom, states));
+        file.rows.push(this.createColorToNormalRecipe(eq, dyeFrom, colorDyeGlobals.states, colorDyeGlobals.trackerStatId));
       });
     });
     
     D2RMM.writeTsv(this.target, file);
   }
 
-  createNormalToColorRecipe(eq, dyeTo, states) {
+  createNormalToColorRecipe(eq, dyeTo, states, trackerStatId) {
     let desc = this.createDescription(eq.name, ColorConstants.names.normal, dyeTo.clrName);
     let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.clrName);
     let trackerValue = this.calculateTrackerValue(0, dyeTo.trackerValue);
 
-    let recipe = this.createRecipeBase(desc, 0, eq.itemType, dyeTo.itemCode);
+    let recipe = this.createRecipeBase(desc, trackerStatId, 0, eq.itemType, dyeTo.itemCode);
     this.addColor(recipe, dyeTo.clrName, targetColorStateId, trackerValue);
 
     return recipe;
   }
 
-  createColorToColorRecipe(eq, dyeFrom, dyeTo, states) {
+  createColorToColorRecipe(eq, dyeFrom, dyeTo, states, trackerStatId) {
     let desc = this.createDescription(eq.name, dyeFrom.clrName, dyeTo.clrName);
     let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.clrName);
     let targetColorStateId = this.findStateId(states, eq.itemType, dyeTo.clrName);
     let trackerDiffValue = this.calculateTrackerValue(dyeFrom.trackerValue, dyeTo.trackerValue);
 
-    let recipe = this.createRecipeBase(desc, dyeFrom.trackerValue, eq.itemType, dyeTo.itemCode);
+    let recipe = this.createRecipeBase(desc, trackerStatId, dyeFrom.trackerValue, eq.itemType, dyeTo.itemCode);
     this.changeColor(recipe, dyeFrom.clrName, currentColorStateId, dyeTo.clrName, targetColorStateId, trackerDiffValue);
 
     return recipe;
   }
 
-  createColorToNormalRecipe(eq, dyeFrom, states) {
+  createColorToNormalRecipe(eq, dyeFrom, states, trackerStatId) {
     let desc = this.createDescription(eq.name, dyeFrom.clrName, ColorConstants.names.clear);
     let currentColorStateId = this.findStateId(states, eq.itemType, dyeFrom.clrName);
     let trackerValue = this.calculateTrackerValue(dyeFrom.trackerValue, 0);
 
-    let recipe = this.createRecipeBase(desc, dyeFrom.trackerValue, eq.itemType, DyeConstants.cubeMainClear.itemCode);
+    let recipe = this.createRecipeBase(desc, trackerStatId, dyeFrom.trackerValue, eq.itemType, DyeConstants.cubeMainClear.itemCode);
     this.clearColor(recipe, dyeFrom.clrName, currentColorStateId, trackerValue)
 
     return recipe;
@@ -357,13 +351,13 @@ class CubeMainBuilder {
   //   recipe assembly   //
   //=====================//
 
-  createRecipeBase(description, currentColorTrackerValue, itemType, dyeItem) {
+  createRecipeBase(description, trackerStatId, currentColorTrackerValue, itemType, dyeItem) {
     let recipe = {};
 
     recipe[FileConstants.cubeMainColumns.enabled]     = 1;
     recipe[FileConstants.cubeMainColumns.version]     = 100;
     recipe[FileConstants.cubeMainColumns.op]          = 18;
-    recipe[FileConstants.cubeMainColumns.param]       = 368;
+    recipe[FileConstants.cubeMainColumns.param]       = trackerStatId; // itemstatcost.txt ID for CD_Tracker, tracks item's current color
     recipe[FileConstants.cubeMainColumns.numinputs]   = 2;
     recipe[FileConstants.cubeMainColumns.output]      = "useitem";
     recipe[FileConstants.cubeMainColumns.eol]         = 0;
@@ -422,28 +416,44 @@ class CubeMainBuilder {
 class ItemStatCostBuilder {
   target = FileConstants.FILE_PATH_ITEMSTATCOST;
 
-  build() {
-    this.addDyes();
+  build(colorDyeGlobals) {
+    this.addDyes(colorDyeGlobals);
   }
   
-  addDyes() {
+  addDyes(colorDyeGlobals) {
     let file = D2RMM.readTsv(this.target);
-
     let index = file.rows.length;
+
+    // add dye stats
     DyeConstants.itemStatCost.forEach(dye => {
       file.rows.push(this.createColorDyeEntry(index, dye));
       index++;
     });
     
+    // add tracker stat
+    file.rows.push(this.createColorDyeEntryBase(index, cdConstants.underscore.tracker));
+    colorDyeGlobals.trackerStatId = index; // used in cubemain.txt
+    
     D2RMM.writeTsv(this.target, file);
   }
 
   createColorDyeEntry(index, dye) {
+    let entry = this.createColorDyeEntryBase(index, dye.statId);
+
+    entry[FileConstants.itemStatCostColums.descPriority] = 997;
+    entry[FileConstants.itemStatCostColums.descFunc]     = 3;
+    entry[FileConstants.itemStatCostColums.descVal]      = 0;
+    entry[FileConstants.itemStatCostColums.descStrPos]   = dye.descStrPosNeg;
+    entry[FileConstants.itemStatCostColums.descStrNeg]   = dye.descStrPosNeg;
+    
+    return entry;
+  }
+
+  createColorDyeEntryBase(index, statId) {
     let entry = {};
 
     // todo: change bit values (Bonesy trademark)
-
-    entry[FileConstants.itemStatCostColums.stat]        = dye.statId;
+    entry[FileConstants.itemStatCostColums.stat]        = statId;
     entry[FileConstants.itemStatCostColums.id]          = index;
     entry[FileConstants.itemStatCostColums.sendBits]    = 16;
     entry[FileConstants.itemStatCostColums.add]         = 102;
@@ -454,14 +464,6 @@ class ItemStatCostBuilder {
     entry[FileConstants.itemStatCostColums.saveBits]    = 11;
     entry[FileConstants.itemStatCostColums.saveAdd]     = 10;
     entry[FileConstants.itemStatCostColums.eol]         = 0;
-    
-    if (dye.isClr) {
-      entry[FileConstants.itemStatCostColums.descPriority] = 997;
-      entry[FileConstants.itemStatCostColums.descFunc]     = 3;
-      entry[FileConstants.itemStatCostColums.descVal]      = 0;
-      entry[FileConstants.itemStatCostColums.descStrPos]   = dye.descStrPosNeg;
-      entry[FileConstants.itemStatCostColums.descStrNeg]   = dye.descStrPosNeg;
-    }
     
     return entry;
   }
@@ -502,18 +504,18 @@ class PropertiesBuilder {
 class StatesBuilder {
   target = FileConstants.FILE_PATH_STATES;
 
-  build(states) {
-    this.addDyes(states);
+  build(colorDyeGlobals) {
+    this.addDyes(colorDyeGlobals);
   }
 
-  addDyes(states) {
+  addDyes(colorDyeGlobals) {
     let file = D2RMM.readTsv(this.target);
 
     let id = file.rows.length;
     DyeConstants.equipment.forEach(eq => {
       DyeConstants.states.forEach(dye => {
         file.rows.push(this.createColorDyeEntry(id, eq, dye));
-        states.push({ type: eq.itemType, clr: dye.clrName, id: id }); // these new states will be referenced in cubemain.txt, so we need to save these for later
+        colorDyeGlobals.states.push({ type: eq.itemType, clr: dye.clrName, id: id }); // these new states will be referenced in cubemain.txt, so we need to save these for later
         id++;
       });
     });
@@ -587,14 +589,17 @@ class ItemModifiersBuilder {
 //=========================================//
 
 class ColorDyeBuilder {
-  build() {
-    var states = []; // type: "weap", clr: White, id: 192
+  colorDyeGlobals = {
+    trackerStatId: 0,
+    states: [], // type: "weap", clr: White, id: 192
+  };
 
-    (new  ItemStatCostBuilder()).build();       // Item stat values and shop costs
-    (new    PropertiesBuilder()).build();       // Item property names
-    (new        StatesBuilder()).build(states); // States
-    (new      CubeMainBuilder()).build(states); // Cube recipes
-    (new ItemModifiersBuilder()).build();       // Modifiers on items: "Color Dyed: xxx"
+  build() {
+    (new  ItemStatCostBuilder()).build(this.colorDyeGlobals); // Item stat values and shop costs
+    (new    PropertiesBuilder()).build();                     // Item property names
+    (new        StatesBuilder()).build(this.colorDyeGlobals); // States
+    (new      CubeMainBuilder()).build(this.colorDyeGlobals); // Cube recipes
+    (new ItemModifiersBuilder()).build();                     // Modifiers on items: "Color Dyed: xxx"
   }
 }
 
