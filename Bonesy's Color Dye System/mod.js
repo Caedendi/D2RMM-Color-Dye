@@ -256,7 +256,7 @@ class DyeConstants {
   static cubeMainClear = { itemCode: ItemConstants.antidotePotion, trackerValue: 0 };
 
   // item-modifiers.json section
-  static itemModifers = [ // order/ids match the original ColorDye item-modifiers.json file. todo: make id scalable.
+  static itemModifers = [
     { clrName: ColorConstants.names.white,  clrCode: ColorConstants.codes.white  },
     { clrName: ColorConstants.names.black,  clrCode: ColorConstants.codes.gray   },
     { clrName: ColorConstants.names.blue,   clrCode: ColorConstants.codes.blue   },
@@ -346,15 +346,6 @@ class CubeMainBuilder {
 
   findStateId(states, type, clr) {
     return states.find(state => state.type === type && state.clr === clr).id;
-
-    // todo: test & delete
-    for (const state of states) {
-      if (state.type === type && state.clr === clr) {
-        return state.id;
-      }
-    }
-
-    return "no_state_id";
   }
 
   calculateTrackerValue(currentValue, desiredValue) {
@@ -441,7 +432,7 @@ class ItemStatCostBuilder {
     let index = file.rows.length;
     DyeConstants.itemStatCost.forEach(dye => {
       file.rows.push(this.createColorDyeEntry(index, dye));
-      id++;
+      index++;
     });
     
     D2RMM.writeTsv(this.target, file);
@@ -522,7 +513,7 @@ class StatesBuilder {
     DyeConstants.equipment.forEach(eq => {
       DyeConstants.states.forEach(dye => {
         file.rows.push(this.createColorDyeEntry(id, eq, dye));
-        states.push({ type: eq.itemType, clr: dye.name, id: id }); // these new states will be referenced in cubemain.txt, so we need to save these for later
+        states.push({ type: eq.itemType, clr: dye.clrName, id: id }); // these new states will be referenced in cubemain.txt, so we need to save these for later
         id++;
       });
     });
@@ -582,16 +573,11 @@ class ItemModifiersBuilder {
     return entry;
   }
 
-  // todo: fix (=broken)
   // assumes item-modifiers.json is properly sequentially ordered. returns the provided startingPoint if it is available, else returns the highest ID + 1.
   determineFirstId(file, preferredId) {
-    // let lastId = file.slice(-1).id;
-    let lastId = file.slice(-1)[FileConstants.jsonProperties.id];
-    if (lastId < preferredId) {
-      return preferredId;
-    }
+    let lastId = file[file.length - 1].id;
 
-    return lastId++;
+    return lastId < preferredId ? preferredId : lastId + 1;;
   }
 };
 
