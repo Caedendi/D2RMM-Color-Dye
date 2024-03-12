@@ -431,14 +431,14 @@ class ItemStatCostBuilder {
     });
     
     // add tracker stat
-    file.rows.push(this.createColorDyeEntryBase(index, cdConstants.underscore.tracker));
+    file.rows.push(this.createTrackerEntry(index, cdConstants.underscore.tracker));
     colorDyeGlobals.trackerStatId = index; // used in cubemain.txt
     
     D2RMM.writeTsv(this.target, file);
   }
 
   createColorDyeEntry(index, dye) {
-    let entry = this.createColorDyeEntryBase(index, dye.statId);
+    let entry = this.createColorDyeEntryBase(index, dye.statId, 2, 1);
 
     entry[FileConstants.itemStatCostColums.descPriority] = 997;
     entry[FileConstants.itemStatCostColums.descFunc]     = 3;
@@ -449,20 +449,25 @@ class ItemStatCostBuilder {
     return entry;
   }
 
-  createColorDyeEntryBase(index, statId) {
+  createTrackerEntry(index, statId) {
+    return this.createColorDyeEntryBase(index, statId, 4, 7);
+  }
+
+  createColorDyeEntryBase(index, statId, saveBits, saveAdd) {
     let entry = {};
 
-    // todo: change bit values (Bonesy trademark)
+    // The SaveBits and SaveAdd values are dependant on the amount of color dye stats and therefore how many values the tracker can contain.
+    // If you increase the amount of dyes and therefore the min/max amount of the tracker value, SaveBits and SaveAdd should scale accordingly.
+    // See Blizzard's data guide on how this works.
     entry[FileConstants.itemStatCostColums.stat]        = statId;
     entry[FileConstants.itemStatCostColums.id]          = index;
     entry[FileConstants.itemStatCostColums.sendBits]    = 16;
     entry[FileConstants.itemStatCostColums.add]         = 102;
     entry[FileConstants.itemStatCostColums.multiply]    = 20;
-    entry[FileConstants.itemStatCostColums.valShift]    = 1024;
-    entry[FileConstants.itemStatCostColums.saveBits109] = 10;
-    entry[FileConstants.itemStatCostColums.saveAdd109]  = 10;
-    entry[FileConstants.itemStatCostColums.saveBits]    = 11;
-    entry[FileConstants.itemStatCostColums.saveAdd]     = 10;
+    entry[FileConstants.itemStatCostColums.saveBits109] = saveBits;
+    entry[FileConstants.itemStatCostColums.saveAdd109]  = saveAdd;
+    entry[FileConstants.itemStatCostColums.saveBits]    = saveBits;
+    entry[FileConstants.itemStatCostColums.saveAdd]     = saveAdd;
     entry[FileConstants.itemStatCostColums.eol]         = 0;
     
     return entry;
