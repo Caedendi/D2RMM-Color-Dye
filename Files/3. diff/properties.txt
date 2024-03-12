@@ -1,8 +1,0 @@
-CD-White	1	17	CD_White																																0
-CD-Black	1	17	CD_Black																																0
-CD-Blue	1	17	CD_Blue																																0
-CD-Red	1	17	CD_Red																																0
-CD-Green	1	17	CD_Green																																0
-CD-Yellow	1	17	CD_Yellow																																0
-CD-Purple	1	17	CD_Purple																																0
-CD-Tracker	1	17	CD_Tracker																																0
