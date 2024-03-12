@@ -1,0 +1,8 @@
+CD_White	361			16											102	20	1024	10	10	11	10																997	3	0	CDWhite	CDWhite										0
+CD_Black	362			16											102	20	1024	10	10	11	10																997	3	0	CDBlack	CDBlack										0
+CD_Blue	363			16											102	20	1024	10	10	11	10																997	3	0	CDBlue	CDBlue										0
+CD_Red	364			16											102	20	1024	10	10	11	10																997	3	0	CDRed	CDRed										0
+CD_Green	365			16											102	20	1024	10	10	11	10																997	3	0	CDGreen	CDGreen										0
+CD_Yellow	366			16											102	20	1024	10	10	11	10																997	3	0	CDYellow	CDYellow										0
+CD_Purple	367			16											102	20	1024	10	10	11	10																997	3	0	CDPurple	CDPurple										0
+CD_Tracker	368			16											102	20	1024	10	10	11	10																														0
