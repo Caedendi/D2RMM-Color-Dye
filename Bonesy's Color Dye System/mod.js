@@ -21,7 +21,7 @@ class FileConstants {
   static PATH_LOCAL_LNG_STRINGS   = "local\\lng\\strings\\";
   static FILE_PATH_ITEM_MODIFIERS = `${this.PATH_LOCAL_LNG_STRINGS}item-modifiers${this.FILE_EXTENSION_JSON}`;
   
-  // excel
+  // excel txt files
   static PATH_GLOBAL_EXCEL      = "global\\excel\\"
   static FILE_PATH_CUBEMAIN     = `${this.PATH_GLOBAL_EXCEL}cubemain${this.FILE_EXTENSION_TXT}`;
   static FILE_PATH_ITEMSTATCOST = `${this.PATH_GLOBAL_EXCEL}itemstatcost${this.FILE_EXTENSION_TXT}`;
@@ -458,7 +458,7 @@ class ItemStatCostBuilder {
 
     // The SaveBits and SaveAdd values are dependant on the amount of color dye stats and therefore how many values the tracker can contain.
     // If you increase the amount of dyes and therefore the min/max amount of the tracker value, SaveBits and SaveAdd should scale accordingly.
-    // See Blizzard's data guide on how this works.
+    // The 1.09 values are needed for legacy mode. See Blizzard's data guide for more info on how this works.
     entry[FileConstants.itemStatCostColums.stat]        = statId;
     entry[FileConstants.itemStatCostColums.id]          = index;
     entry[FileConstants.itemStatCostColums.sendBits]    = 16;
