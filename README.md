@@ -20,7 +20,7 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 ## Screenshots
 
-To do. See [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) in the meantime.
+To do. In the meantime, see [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418).
 
 
 ## Changelog
@@ -28,7 +28,8 @@ To do. See [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) in 
 ### 1.0.0
 - Initial D2RMM release, feature parity with [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418)
   - Some lines in cubemain.txt are shifted, this mod's order makes more sense.
-- The added entries' IDs are generated dynamically (not hardcoded), so it's compatible with any (D2RMM) mod that touches the same files.
+  - Bonesy's trademark values for ValShift, Save Bits and Save Add in itemstatcost.txt have been altered/removed on his suggestion.
+- The added entries' IDs are generated dynamically, so it's compatible with any D2RMM mod that touches the same files.
 
 
 ## How to Install
