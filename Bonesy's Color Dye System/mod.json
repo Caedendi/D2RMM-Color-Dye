@@ -1,8 +1,16 @@
 {
   "name": "Bonesy's Color Dye System",
-  "description": "Dye your weapon, armor, helm and shield to your preferred color using Perfect Gems/Skulls. Use an Antidote Potion to remove.",
+  "description": "Dye your weapon, armor, helm and shield to your preferred color using 3 Perfect Gems/Skulls. Use 3 Antidote Potions to remove.",
   "author": "Caedendi, Bonesy",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/474",
-  "version": "1.0.0",
-  "config": []
+  "version": "1.1.0",
+  "config": [
+    {
+      "id": "ShouldUseCheapRecipes",
+      "type": "checkbox",
+      "name": "Cheap Recipes",
+      "description": "Sets dye ingredients to a single Gem, Skull or Antidote Potion instead of the default 3.",
+      "defaultValue": false
+    }
+  ]
 }

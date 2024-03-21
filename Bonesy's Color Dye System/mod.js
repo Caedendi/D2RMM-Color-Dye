@@ -358,14 +358,14 @@ class CubeMainBuilder {
     recipe[FileConstants.cubeMainColumns.version]     = 100;
     recipe[FileConstants.cubeMainColumns.op]          = 18;
     recipe[FileConstants.cubeMainColumns.param]       = trackerStatId; // itemstatcost.txt ID for CD_Tracker, tracks item's current color
-    recipe[FileConstants.cubeMainColumns.numinputs]   = 2;
+    recipe[FileConstants.cubeMainColumns.numinputs]   = config.ShouldUseCheapRecipes ? 2 : 4;
     recipe[FileConstants.cubeMainColumns.output]      = "useitem";
     recipe[FileConstants.cubeMainColumns.eol]         = 0;
 
-    recipe[FileConstants.cubeMainColumns.description] = description;              // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
-    recipe[FileConstants.cubeMainColumns.value]       = currentColorTrackerValue; // 0 normal, 1 white, 2 black, etc reset at next equip type
-    recipe[FileConstants.cubeMainColumns.input1]      = itemType;                 // weap, helm, shld, tors
-    recipe[FileConstants.cubeMainColumns.input2]      = dyeItem;                  // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
+    recipe[FileConstants.cubeMainColumns.description] = description;                                                 // `${type.name} Dye - ${dye.from} -> ${dye.to}`;
+    recipe[FileConstants.cubeMainColumns.value]       = currentColorTrackerValue;                                    // 0 normal, 1 white, 2 black, etc reset at next equip type
+    recipe[FileConstants.cubeMainColumns.input1]      = itemType;                                                    // weap, helm, shld, tors
+    recipe[FileConstants.cubeMainColumns.input2]      = config.ShouldUseCheapRecipes ? dyeItem : `${dyeItem},qty=3`; // gpw, skz, gpb, gpr, gpg, gpy, gpv, yps - white, black, blue, red, green, yellow, purple, remove
 
     return recipe;
   }
@@ -440,7 +440,7 @@ class ItemStatCostBuilder {
   createColorDyeEntry(index, dye) {
     let entry = this.createColorDyeEntryBase(index, dye.statId, 2, 1);
 
-    entry[FileConstants.itemStatCostColums.descPriority] = 997;
+    entry[FileConstants.itemStatCostColums.descPriority] = 999;
     entry[FileConstants.itemStatCostColums.descFunc]     = 3;
     entry[FileConstants.itemStatCostColums.descVal]      = 0;
     entry[FileConstants.itemStatCostColums.descStrPos]   = dye.descStrPosNeg;
@@ -461,7 +461,7 @@ class ItemStatCostBuilder {
     // The 1.09 values are needed for legacy mode. See Blizzard's data guide for more info on how this works.
     entry[FileConstants.itemStatCostColums.stat]        = statId;
     entry[FileConstants.itemStatCostColums.id]          = index;
-    entry[FileConstants.itemStatCostColums.sendBits]    = 16;
+    entry[FileConstants.itemStatCostColums.sendBits]    = 2;
     entry[FileConstants.itemStatCostColums.add]         = 102;
     entry[FileConstants.itemStatCostColums.multiply]    = 20;
     entry[FileConstants.itemStatCostColums.saveBits109] = saveBits;

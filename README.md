@@ -62,7 +62,7 @@ The game will crash if you disable this mod and then try to load a save file wit
 ## Roadmap
 
 - [x] Full feature parity with the original mods
-- [ ] Add option to use quantity=3 to match D2RLaunch?
+- [x] Add option to use quantity=3 to match D2RLaunch
 
 
 ## Recommended Mods
