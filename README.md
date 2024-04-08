@@ -20,7 +20,7 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 ## Screenshots
 
-To do. In the meantime, see [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418).
+To do. In the meantime, see [the Nexus Mods page](https://www.nexusmods.com/diablo2resurrected/mods/474).
 
 
 ## Changelog
