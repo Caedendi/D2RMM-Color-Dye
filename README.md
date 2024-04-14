@@ -24,6 +24,17 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 [![How to Use Bonesy's Color Dye System for D2RMM](https://img.youtube.com/vi/WuqzsL0vHJ0/maxresdefault.jpg)](https://www.youtube.com/watch?v=WuqzsL0vHJ0){:target="_blank"}
 
+**How to Use Bonesy's Color Dye System for D2RMM**
+
+<a href="https://www.youtube.com/watch?v=WuqzsL0vHJ0" target="_blank">
+  <img src="https://img.youtube.com/vi/WuqzsL0vHJ0/maxresdefault.jpg" alt="How to Use Bonesy's Color Dye System for D2RMM">
+</a>
+
+**How to Use Bonesy's Color Dye System for D2RMM**
+
+<a href="https://www.youtube.com/watch?v=WuqzsL0vHJ0" target="_blank">
+  <img src="https://img.youtube.com/vi/WuqzsL0vHJ0/maxresdefault.jpg" alt="How to Use Bonesy's Color Dye System for D2RMM" style="width:100%;">
+</a>
 
 ## Changelog
 
