@@ -5,7 +5,7 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 ## Table of Contents
 
-- [Screenshots](#screenshots)
+- [Demo](#demo)
 - [Changelog](#changelog)
   - [2.0.0](#200)
   - [1.0.0](#100)
@@ -18,9 +18,9 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 - [License/Permissions](#licensepermissions)
 
 
-## Screenshots
+## Demo
 
-To do. In the meantime, see [the Nexus Mods page](https://www.nexusmods.com/diablo2resurrected/mods/474).
+[![How to Use Bonesy's Color Dye System for D2RMM](https://img.youtube.com/vi/WuqzsL0vHJ0/0.jpg)](https://www.youtube.com/watch?v=WuqzsL0vHJ0)
 
 
 ## Changelog
