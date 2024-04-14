@@ -5,7 +5,7 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 
 ## Table of Contents
 
-- [Screenshots](#screenshots)
+- [Demo](#demo)
 - [Changelog](#changelog)
   - [2.0.0](#200)
   - [1.0.0](#100)
@@ -18,9 +18,11 @@ A D2RMM implementation for the [Color Dye System](https://www.youtube.com/watch?
 - [License/Permissions](#licensepermissions)
 
 
-## Screenshots
+## Demo
 
-To do. In the meantime, see [the Nexus Mods page](https://www.nexusmods.com/diablo2resurrected/mods/474).
+**How to Use Bonesy's Color Dye System for D2RMM**
+
+[![How to Use Bonesy's Color Dye System for D2RMM](https://img.youtube.com/vi/WuqzsL0vHJ0/maxresdefault.jpg)](https://www.youtube.com/watch?v=WuqzsL0vHJ0)
 
 
 ## Changelog
@@ -89,12 +91,13 @@ The Color Dye System concept was created by [Bonesy](https://www.nexusmods.com/u
 
 I initially learned of Bonesy's Color Dye System through the [ColorDye](https://www.nexusmods.com/diablo2resurrected/mods/418) mod by Slim/[roryskys](https://www.nexusmods.com/users/74559688) on Nexus Mods. He is unclear on his sources/credits other than that he mentions "it was created by Bonesy" in his [YouTube video](https://www.youtube.com/watch?v=okYJVotnwYw&), but looking at his mod files Bonesy and I concluded he basically 1:1 ripped them from Vanilla++ without permission, simplifying the cube recipes to only use Perfect Gems and omit the mod-specific items Storage Bag, Empty Bottle and [Color] Bottles.
 
-For transparancy's sake: I ripped off Slim, who ripped off Bonesy, but at least I asked Bonesy for permission. Slim never responded.
+For transparency's sake: I ripped off Slim, who ripped off Bonesy, but at least I asked Bonesy for permission. Slim never responded.
 
 Major thanks to:
 - [Bonesy](https://www.d2rmodding.com/) for creating the [Color Dye System](https://www.youtube.com/watch?v=LRQeFO0Y3Y4) and his numerous other contributions to the D2R modding community
   - Be sure to check out his [ReMoDDeD](https://www.d2rmodding.com/remodded) and [Vanilla++](https://www.d2rmodding.com/d2rlaunch) mods!
 - [olegbl](https://github.com/olegbl) for creating [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169)
+- [VBPlays](https://www.nexusmods.com/diablo2resurrected/users/149693708) for the feature/tutorial video
 
 
 ## License/Permissions
